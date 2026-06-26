@@ -7779,5 +7779,965 @@
     ],
     "a": 0,
     "e": "Spoofing in STRIDE refers to illegitimately assuming another identity, which includes replaying a captured token to impersonate a legitimate user. Tampering involves altering data, Repudiation involves denying actions, and Elevation of Privilege involves gaining unauthorized higher access — identity impersonation through token replay is categorized under Spoofing."
+  },
+  {
+    "d": 5,
+    "q": "A TLS 1.3 session uses ECDHE with X25519 for key exchange. An attacker records the entire session. Six months later, the server's long-term certificate private key is stolen. Which statement BEST describes the impact on the recorded session?",
+    "o": [
+      "The session can be decrypted because the certificate key was used to protect it",
+      "The session cannot be decrypted because ephemeral keys were used and are no longer available",
+      "The session can be decrypted by replaying the handshake with the stolen key",
+      "The session can be decrypted because X25519 does not support forward secrecy"
+    ],
+    "a": 1,
+    "e": "TLS 1.3 with ECDHE uses ephemeral per-session key pairs that are discarded after the handshake. The long-term certificate key is only used for authentication, not to protect session keys, so compromising it later does not expose past sessions. X25519 explicitly provides Perfect Forward Secrecy, and there is no way to replay the handshake — the ephemeral key material is gone, making recorded sessions undecryptable."
+  },
+  {
+    "d": 5,
+    "q": "A security engineer is choosing between AES-128-GCM and AES-256-GCM for encrypting a high-volume IoT telemetry stream. The threat model includes a well-funded nation-state adversary with quantum computing capability. Which statement BEST justifies the selection?",
+    "o": [
+      "AES-128-GCM is sufficient because quantum attacks do not affect symmetric ciphers",
+      "AES-256-GCM is preferred because Grover's algorithm effectively halves the key search space, reducing AES-128 to approximately 64-bit security against a quantum adversary",
+      "AES-256-GCM is preferred because GCM mode is incompatible with AES-128",
+      "AES-128-GCM is preferred because a smaller key improves IoT device performance with no security trade-off against quantum adversaries"
+    ],
+    "a": 1,
+    "e": "Grover's algorithm provides a quadratic speedup for searching unstructured spaces, effectively halving the bit security of a symmetric key — AES-128 drops to approximately 64-bit security against a quantum adversary, which is insufficient. AES-256 drops to about 128-bit security, which remains acceptable. Grover's algorithm does affect symmetric ciphers (halves security), GCM is compatible with any AES key size, and the IoT performance trade-off does not justify reduced security against a nation-state quantum threat."
+  },
+  {
+    "d": 5,
+    "q": "An application uses CBC mode with a static IV derived from the application's startup timestamp. An attacker who can observe multiple ciphertexts of similar plaintexts and who knows the IV can mount which specific attack?",
+    "o": [
+      "Padding oracle attack",
+      "Meet-in-the-middle attack",
+      "Chosen-plaintext attack enabling IV-based block correlation",
+      "Replay attack"
+    ],
+    "a": 2,
+    "e": "CBC requires a random, unpredictable IV per message. A predictable or static IV allows an attacker who controls or observes plaintext to correlate encrypted blocks, potentially revealing plaintext through a chosen-plaintext attack — if the attacker can guess or determine the IV before submission, they can craft input to reveal data. A padding oracle attack requires decryption oracle access, meet-in-the-middle targets double encryption, and a replay attack resends captured packets — predictable IVs enable IV-based plaintext correlation."
+  },
+  {
+    "d": 5,
+    "q": "A developer implements HMAC-SHA256 for API request signing but generates the HMAC key by hashing the client's user ID with MD5. An attacker discovers the client's user ID. Which cryptographic weakness MOST directly enables the attacker to forge API requests?",
+    "o": [
+      "SHA-256 is not suitable for HMAC",
+      "The HMAC key space is effectively reduced to the MD5 output space (128 bits), and MD5 is computationally feasible to preimage-attack given a known user ID",
+      "HMAC-SHA256 does not provide authentication",
+      "The attacker needs the server's private key to forge requests"
+    ],
+    "a": 1,
+    "e": "MD5 is a fast, broken hash function. Using MD5 of a known value (the user ID) as an HMAC key means the key material is fully deterministic and computationally derivable from a known input. The attacker simply computes MD5(user_id) to obtain the HMAC key and forge any request. SHA-256 is perfectly suitable for HMAC, HMAC does provide authentication, and no private key is involved here — the weakness is deriving the HMAC key deterministically from a known, low-entropy input using a broken hash."
+  },
+  {
+    "d": 5,
+    "q": "A cryptographic implementation uses RSA-2048 for signing. The developer mistakenly uses the same nonce value in two separate ECDSA signatures over different messages. What is the MOST severe consequence?",
+    "o": [
+      "The signatures become invalid",
+      "The private key can be algebraically recovered from the two signatures",
+      "The messages become visible in transit",
+      "Forward secrecy is lost for future sessions"
+    ],
+    "a": 1,
+    "e": "ECDSA signatures include the nonce (k) as a critical secret. If the same k is used for two different message signatures, the private key can be algebraically recovered using the two signature pairs — this is a well-known vulnerability (exploited against Sony PlayStation 3). RSA signing is mentioned in the setup but nonce reuse in ECDSA is the specific flaw. The signatures may still verify, no message confidentiality is involved, and forward secrecy is unrelated — private key recovery from nonce reuse is the catastrophic consequence."
+  },
+  {
+    "d": 5,
+    "q": "An attacker on a switched network sends a 802.1Q double-tagged Ethernet frame with an outer VLAN tag matching the native VLAN of the trunk port. What attack is occurring and what is its PRIMARY limitation?",
+    "o": [
+      "VLAN hopping via switch spoofing; limited by requiring access to a trunk port",
+      "VLAN hopping via double tagging; limited to one-way traffic as return packets cannot be double-tagged back",
+      "ARP poisoning; limited to the local broadcast domain",
+      "MAC flooding; limited by CAM table size"
+    ],
+    "a": 1,
+    "e": "Double-tagging VLAN hopping works by crafting a frame with two 802.1Q tags — the outer tag matches the native VLAN of a trunk, is stripped by the first switch, and the inner tag carries the target VLAN, causing the frame to be forwarded to the target VLAN. Its critical limitation is that it is unidirectional: the attacker can send frames to the target VLAN, but return traffic uses proper routing and cannot be double-tagged back to the attacker's VLAN. Switch spoofing is a separate VLAN hopping method, ARP poisoning is distinct, and MAC flooding is unrelated."
+  },
+  {
+    "d": 5,
+    "q": "A security analyst observes that a host is sending IGMP membership reports to a multicast group it never legitimately joined, followed by rapid bursts of UDP traffic. Which attack MOST likely describes this behavior?",
+    "o": [
+      "DNS amplification DDoS",
+      "Multicast-based data exfiltration or covert C2 channel",
+      "BGP route injection",
+      "MAC flooding"
+    ],
+    "a": 1,
+    "e": "Joining unexpected multicast groups and exchanging UDP traffic over multicast is a covert channel technique used for C2 communication or data exfiltration — multicast traffic is often less scrutinized by security tools. DNS amplification uses DNS resolvers to amplify traffic, BGP route injection manipulates internet routing tables, and MAC flooding overwhelms switch CAM tables — unexpected multicast membership with data exchange is characteristic of covert multicast exfiltration or C2."
+  },
+  {
+    "d": 4,
+    "q": "An attacker exploits BGP by announcing a more specific route (/25) for an IP block legitimately owned by a financial institution, causing a portion of the institution's internet traffic to be rerouted through the attacker's network. This attack is known as:",
+    "o": [
+      "BGP route reflector compromise",
+      "BGP prefix hijacking",
+      "DNS cache poisoning",
+      "OSPF neighbor spoofing"
+    ],
+    "a": 1,
+    "e": "BGP prefix hijacking occurs when an attacker announces more-specific or unauthorized routes for IP address blocks they don't own, causing BGP routers to prefer the fraudulent route and redirect traffic. A more-specific route (/25 over /24) always wins in BGP path selection regardless of origin. A route reflector compromise would require internal AS access, DNS cache poisoning targets name resolution, and OSPF neighbor spoofing targets internal routing — announcing unauthorized prefixes to divert traffic is BGP prefix hijacking."
+  },
+  {
+    "d": 5,
+    "q": "A penetration tester discovers that an internal Windows network uses LLMNR and NBT-NS for name resolution when DNS fails. The tester runs Responder to capture NTLMv2 hashes. Which sequence of events MOST accurately describes how this attack succeeds?",
+    "o": [
+      "Responder poisons ARP to redirect traffic, then captures TGT tickets",
+      "A client fails DNS resolution, broadcasts LLMNR/NBT-NS, Responder responds claiming to be the target, and the client sends NTLMv2 credentials to authenticate",
+      "Responder intercepts Kerberos TGS requests and relays them to the target service",
+      "Responder exploits MS17-010 to inject a credential capture driver"
+    ],
+    "a": 1,
+    "e": "When DNS fails, Windows falls back to LLMNR and NBT-NS broadcast name resolution. Responder listens for these broadcasts and responds to all queries, falsely claiming to host the requested resource. The client attempts to authenticate to Responder using NTLMv2, and Responder captures the challenge-response hash. ARP poisoning is not used, TGT tickets are Kerberos artifacts (not captured here), TGS relay is a different attack (NTLM relay), and MS17-010 is EternalBlue SMB exploitation — the LLMNR/NBT-NS poisoning → NTLMv2 capture chain is what Responder does."
+  },
+  {
+    "d": 5,
+    "q": "During a purple team exercise, the red team demonstrates an NTLM relay attack. The blue team asks how to MOST effectively prevent it without disabling NTLM entirely. Which control is MOST effective?",
+    "o": [
+      "Enabling LLMNR on all clients",
+      "Requiring SMB signing on all clients and servers",
+      "Deploying a WAF on the network perimeter",
+      "Configuring DNS to prevent external queries"
+    ],
+    "a": 1,
+    "e": "SMB signing ensures that SMB packets are cryptographically signed, preventing a relay attacker from forwarding captured credentials because the relay would fail the signature verification. NTLM relay requires an unsigned connection to succeed. Enabling LLMNR makes things worse (it's the source of the captured credentials), a WAF protects web applications, and external DNS restrictions don't prevent internal NTLM relay — SMB signing directly breaks the relay technique."
+  },
+  {
+    "d": 5,
+    "q": "A threat actor achieves code execution on a Windows host, immediately runs 'sekurlsa::logonpasswords' in memory using a reflective DLL, extracts credentials from LSASS, and exits without writing any file to disk. Which combination of defensive controls would MOST effectively detect or prevent this technique?",
+    "o": [
+      "Antivirus signature scanning and firewall rules",
+      "Credential Guard (LSA isolation) combined with EDR behavioral detection of LSASS memory access",
+      "Disabling PowerShell and blocking macro execution",
+      "Network DLP and DNS filtering"
+    ],
+    "a": 1,
+    "e": "Mimikatz's sekurlsa::logonpasswords targets LSASS process memory. Credential Guard uses virtualization-based security (VBS) to isolate LSA secrets in a protected environment, preventing extraction even with code execution. EDR that detects anomalous process access to LSASS provides detection. Antivirus signatures miss reflective, memory-only execution, disabling PowerShell/macros doesn't prevent native DLL injection, and network controls can't see in-memory credential access — Credential Guard + EDR behavioral detection is the most effective combination."
+  },
+  {
+    "d": 5,
+    "q": "A red team operator uses the 'overpass-the-hash' technique. Which statement BEST describes what this technique does and how it differs from standard pass-the-hash?",
+    "o": [
+      "Overpass-the-hash forges a Kerberos TGT using an NTLM hash, converting it to a Kerberos ticket for use in Kerberos-only environments",
+      "Overpass-the-hash reuses an NTLMv2 hash to authenticate to SMB shares",
+      "Overpass-the-hash replays a captured TGT to impersonate a user",
+      "Overpass-the-hash uses a stolen certificate to authenticate via PKINIT"
+    ],
+    "a": 0,
+    "e": "Overpass-the-hash (or 'pass-the-key') uses a captured NTLM hash to request a Kerberos TGT from the KDC, converting the Windows credential into a Kerberos ticket. This allows the attacker to operate in Kerberos-authenticated environments without cracking the password. Standard pass-the-hash uses the NTLM hash directly for NTLM authentication to SMB. TGT replay is the pass-the-ticket technique, and PKINIT uses certificates — overpass-the-hash specifically converts an NTLM hash into a Kerberos TGT."
+  },
+  {
+    "d": 5,
+    "q": "An EDR alert fires showing that svchost.exe spawned cmd.exe which then ran 'powershell.exe -enc [base64 string]'. The base64 decodes to a command that downloads and executes a script from an internal share. Which ATT&CK technique is MOST likely indicated?",
+    "o": [
+      "T1059.001 - PowerShell used for command execution, likely as part of a lateral movement or persistence mechanism",
+      "T1110 - Brute Force",
+      "T1566 - Phishing",
+      "T1003 - OS Credential Dumping"
+    ],
+    "a": 0,
+    "e": "Encoded PowerShell commands (Base64 with -enc flag) executing downloaded scripts from an internal share is classic T1059.001 (PowerShell execution), often used for payload delivery, lateral movement, or persistence. Brute force (T1110) involves repeated authentication attempts, phishing (T1566) involves initial access via deceptive messages, and credential dumping (T1003) targets credential stores — encoded PowerShell downloading and executing content is T1059.001."
+  },
+  {
+    "d": 5,
+    "q": "A threat actor plants a malicious update in a software vendor's DevOps pipeline at the build stage, specifically injecting code after the source code repository is checked but before the software is compiled. This type of supply chain attack is MOST accurately described as:",
+    "o": [
+      "A watering hole attack on the vendor's customers",
+      "A build-time supply chain compromise (CI/CD pipeline poisoning)",
+      "A Trojan horse distributed via a software update channel",
+      "A dependency confusion attack"
+    ],
+    "a": 1,
+    "e": "Injecting malicious code into the build pipeline after code checkout but before compilation is CI/CD pipeline poisoning — it targets the build process itself, producing malicious binaries from clean source code (similar to the SolarWinds attack's Sunspot implant). A watering hole attack compromises a website visited by victims, a Trojan horse is malicious software disguised as legitimate, and a dependency confusion attack substitutes internal package names with malicious public packages — targeting the build system to contaminate compiled output is CI/CD/build-time supply chain compromise."
+  },
+  {
+    "d": 5,
+    "q": "An attacker uses 'AS-REP Roasting' against an Active Directory environment. Which specific configuration on a user account makes this attack possible?",
+    "o": [
+      "The account has a Service Principal Name (SPN) registered",
+      "The account has 'Do not require Kerberos preauthentication' enabled",
+      "The account is a member of the Domain Admins group",
+      "The account has a weak NTLM hash"
+    ],
+    "a": 1,
+    "e": "AS-REP Roasting exploits accounts where Kerberos pre-authentication is disabled — the KDC will return an AS-REP message (encrypted with the user's key) to anyone who asks, without requiring the requester to prove knowledge of the password first. The attacker can then take the encrypted AS-REP offline and crack it. Having an SPN enables Kerberoasting (a different attack), Domain Admin membership is unrelated, and NTLM hash weakness enables pass-the-hash — disabled Kerberos pre-authentication is the specific setting that enables AS-REP Roasting."
+  },
+  {
+    "d": 5,
+    "q": "A forensic analyst is investigating a Linux server suspected of compromise. She runs 'ls -la /tmp' and sees no suspicious files. However, 'lsof | grep /tmp' reveals several file descriptors pointing to deleted files in /tmp that are still open by running processes. What does this finding MOST likely indicate?",
+    "o": [
+      "The filesystem is corrupted",
+      "A malicious process opened files in /tmp, then deleted them while keeping file descriptors open — recovering them is possible via /proc/[pid]/fd/",
+      "The lsof output is unreliable on Linux",
+      "Temporary files are routinely deleted by the OS and this is normal behavior"
+    ],
+    "a": 1,
+    "e": "On Linux, deleting a file removes its directory entry but the file's data persists as long as any process holds an open file descriptor. Malware often exploits this to hide files from directory listings while keeping them accessible. The files can be recovered by reading /proc/[pid]/fd/[fd_number]. Filesystem corruption would manifest differently, lsof is reliable for this purpose, and this combination (deletion + open descriptors to the deleted files) is not routine OS behavior — this is a classic malware anti-forensics technique."
+  },
+  {
+    "d": 5,
+    "q": "A Windows forensic analyst needs to determine which files were recently accessed on a compromised host without a full disk image. Which Windows artifact would MOST reliably provide evidence of recently accessed documents even if the attacker deleted browser history and recent documents from the Start menu?",
+    "o": [
+      "Windows Event Log 4624",
+      "The Windows Registry ShellBags and LNK files in the Recent Items folder",
+      "The Volume Shadow Copy service logs",
+      "The Windows Firewall log"
+    ],
+    "a": 1,
+    "e": "ShellBags (stored in NTUSER.DAT and UsrClass.dat registry hives) record folder browsing history, and LNK (shortcut) files in %APPDATA%\\Microsoft\\Windows\\Recent store metadata about recently accessed files — both persist even if the attacker clears obvious locations. Event log 4624 records logon events not file access, Volume Shadow Copy logs aren't a standard forensic artifact, and the firewall log records network connections — ShellBags and LNK files are the most reliable artifacts for recently accessed file history."
+  },
+  {
+    "d": 5,
+    "q": "During incident response, an analyst uses Volatility to analyze a memory dump and finds a process named 'svchost.exe' running from 'C:\\Users\\Public\\svchost.exe' with no parent process. Which TWO findings MOST strongly suggest malicious activity?",
+    "o": [
+      "The process name is 'svchost.exe' and it has no network connections",
+      "The executable path is non-standard (legitimate svchost runs from System32) and it is orphaned (no expected parent like services.exe)",
+      "The process has a PID above 1000",
+      "The process is consuming less than 1% CPU"
+    ],
+    "a": 1,
+    "e": "Legitimate svchost.exe runs exclusively from C:\\Windows\\System32\\svchost.exe and is always spawned by services.exe. A svchost.exe in a user-writable path like C:\\Users\\Public is masquerading as a system process (process masquerading), and being orphaned (no services.exe parent) further confirms it is not legitimate. PID values above 1000 and low CPU usage are normal and not indicators of compromise — non-standard path combined with missing expected parent process are the two strongest malicious indicators."
+  },
+  {
+    "d": 5,
+    "q": "A threat hunter finds that the Windows Prefetch files on a compromised workstation contain an entry for 'PSEXESVC.EXE' with an execution timestamp that precedes the workstation's reported infection date. What does this MOST likely indicate?",
+    "o": [
+      "The attacker used PsExec to execute commands on this workstation before the infection was detected, suggesting the initial compromise is older than reported",
+      "PsExec is a standard Windows service and its presence in Prefetch is expected",
+      "Prefetch timestamps are unreliable and should be disregarded",
+      "The attacker created a fake Prefetch entry to confuse investigators"
+    ],
+    "a": 0,
+    "e": "PSEXESVC.EXE is the PsExec service binary dropped on a remote system when PsExec is used for remote command execution — it is not a standard Windows component. Its presence in Prefetch (which records program execution history) with a timestamp predating the reported infection date means an attacker used PsExec to run commands on this machine earlier than previously believed. Prefetch timestamps are a highly reliable forensic artifact, and while timestamp manipulation is possible, it is the less likely explanation absent other evidence."
+  },
+  {
+    "d": 4,
+    "q": "A SOC analyst receives a SIEM alert: a privileged service account authenticated to 10 different internal servers within 30 seconds using pass-the-ticket. The analyst checks and the account's actual owner has been on vacation for a week. Which MITRE ATT&CK tactic is MOST relevant?",
+    "o": [
+      "Initial Access",
+      "Collection",
+      "Lateral Movement",
+      "Exfiltration"
+    ],
+    "a": 2,
+    "e": "Rapid sequential authentication to multiple internal hosts using stolen Kerberos tickets is the hallmark of Lateral Movement — the attacker is spreading from one compromised host to others using valid credentials. Initial Access covers gaining the first foothold, Collection covers gathering data, and Exfiltration covers moving data out — moving through the internal network using compromised credentials is Lateral Movement."
+  },
+  {
+    "d": 5,
+    "q": "A cloud security engineer discovers that an AWS Lambda function has an IAM execution role with 'sts:AssumeRole' permissions for any role in the account ('*'). An attacker gains code execution inside the Lambda. What is the MOST severe consequence of this misconfiguration?",
+    "o": [
+      "The attacker can read S3 bucket metadata",
+      "The attacker can assume any IAM role in the account, including those with AdministratorAccess, leading to full account compromise",
+      "The attacker can only access resources in the same VPC as the Lambda",
+      "The attacker can increase the Lambda's memory allocation"
+    ],
+    "a": 1,
+    "e": "sts:AssumeRole with a wildcard resource allows the Lambda execution role to assume any role in the account. If any role has AdministratorAccess (or any other high-privilege policy), the attacker can assume it and gain those permissions, leading to complete account compromise — creating admin users, deleting resources, exfiltrating all data. S3 metadata access alone would require separate S3 permissions, VPC restrictions apply to network access not IAM privilege, and memory allocation is unrelated — full account privilege escalation via unrestricted role assumption is the catastrophic outcome."
+  },
+  {
+    "d": 5,
+    "q": "A multi-tenant SaaS application stores each customer's data in the same database, separated only by a customer_id column. A security researcher discovers that by manipulating the 'id' parameter in API requests, they can retrieve records belonging to other customers. This vulnerability is classified as:",
+    "o": [
+      "SQL injection",
+      "Insecure Direct Object Reference (IDOR) / Broken Object Level Authorization (BOLA)",
+      "Cross-tenant data leakage via XSS",
+      "Server-Side Request Forgery"
+    ],
+    "a": 1,
+    "e": "IDOR (Broken Object Level Authorization / BOLA) occurs when an API exposes internal object references without verifying the requesting user is authorized to access that specific object. Changing the 'id' parameter to access other customers' records is textbook IDOR/BOLA. SQL injection manipulates the query itself rather than just changing parameter values, XSS injects scripts into browsers, and SSRF abuses server-side URL fetching — accessing others' data by changing a reference parameter is IDOR/BOLA."
+  },
+  {
+    "d": 5,
+    "q": "A cloud architect is designing a system where a microservice must access secrets at runtime. The microservice runs on AWS EC2 with an instance profile. Which combination BEST represents a defense-in-depth approach to secrets management, accounting for SSRF risk against the metadata service?",
+    "o": [
+      "Store secrets in environment variables and restrict IAM role to least privilege",
+      "Use AWS Secrets Manager with instance profile access, enforce IMDSv2 (token-based metadata access), and apply least-privilege IAM policies on the instance role",
+      "Hardcode secrets in the application config file and restrict network access",
+      "Store secrets in an S3 bucket encrypted with SSE-S3 and make the bucket private"
+    ],
+    "a": 1,
+    "e": "AWS Secrets Manager provides secure, audited secrets storage with rotation. IMDSv2 mitigates SSRF against the EC2 metadata service by requiring a PUT request to get a session token before credentials can be fetched — breaking SSRF-based metadata credential theft. Least-privilege IAM policies limit blast radius. Environment variables are exposed in memory and via metadata, hardcoded secrets are never acceptable, and S3 secrets are accessible to anyone with S3:GetObject permission — the Secrets Manager + IMDSv2 + least-privilege combination is defense in depth."
+  },
+  {
+    "d": 4,
+    "q": "An organization uses Terraform to deploy infrastructure. A developer accidentally commits an AWS access key and secret key to a public GitHub repository. Within 8 minutes, automated scanners find and use the credentials to spin up 47 EC2 GPU instances for cryptocurrency mining. Which combination of controls would MOST effectively have prevented both the commit AND limited the blast radius?",
+    "o": [
+      "Code review policy and network firewall",
+      "Pre-commit secret scanning hooks, short-lived credentials via IAM Roles instead of long-term access keys, and IAM permission boundaries restricting EC2 instance launch permissions",
+      "HTTPS for the Git repository and DLP at the network edge",
+      "Requiring developers to store credentials in a password manager"
+    ],
+    "a": 1,
+    "e": "Pre-commit secret scanning hooks (e.g., git-secrets, Gitleaks) catch credentials before they are committed. Replacing long-term access keys with IAM roles and short-lived credentials via STS means even if a credential is leaked, it expires quickly. IAM permission boundaries or SCPs can restrict what actions can be performed (e.g., limit EC2 instance types or sizes). Code review doesn't catch secrets in automation, network firewalls don't see GitHub commits, HTTPS doesn't inspect content, and a password manager doesn't enforce IAM scope — the combination of pre-commit scanning + short-lived credentials + permission boundaries addresses both prevention and blast radius."
+  },
+  {
+    "d": 5,
+    "q": "A security team reviews CloudTrail logs and sees hundreds of 'AssumeRole' calls from an EC2 instance across multiple AWS accounts in a multi-account organization. The calls succeed because the cross-account trust policies allow the instance's role. No data exfiltration has been detected. Which attack stage does this MOST likely represent?",
+    "o": [
+      "Initial access via phishing",
+      "Cloud-specific lateral movement and reconnaissance across accounts",
+      "Data exfiltration via S3 presigned URLs",
+      "Credential stuffing against AWS IAM"
+    ],
+    "a": 1,
+    "e": "Systematically assuming roles across multiple accounts in an organization is cloud-specific lateral movement and cross-account reconnaissance — the attacker is mapping the environment and potentially positioning for privilege escalation or data access. Phishing is initial access, S3 presigned URL exfiltration involves actual data movement (not detected), and credential stuffing targets authentication endpoints not already-authenticated role assumption — cross-account role assumption spreading is cloud lateral movement."
+  },
+  {
+    "d": 5,
+    "q": "A security engineer is implementing DNS Security Extensions (DNSSEC). After enabling DNSSEC on a zone, users report that some clients can no longer resolve names in the zone. Investigation reveals the issue is with clients on older resolvers. Which DNSSEC mechanism is MOST likely causing the failure, and what is the corrective action?",
+    "o": [
+      "DS records are missing; add DS records at the parent zone",
+      "DNSSEC adds large RRSIG and DNSKEY records that exceed the 512-byte UDP DNS message limit, requiring EDNS0 support or TCP fallback — older resolvers lacking EDNS0 fail; the fix is to ensure resolvers support EDNS0 or configure TCP fallback",
+      "NSEC records expose zone contents; disable NSEC and use NSEC3",
+      "The zone's SOA TTL is too short, causing key rollover failures"
+    ],
+    "a": 1,
+    "e": "DNSSEC introduces large resource record types (RRSIG, DNSKEY, DS) that can exceed the original 512-byte UDP DNS limit. Resolvers must support EDNS0 (Extension Mechanisms for DNS) to handle larger responses over UDP, or fall back to TCP. Older resolvers without EDNS0 will fail or truncate responses and may not retry over TCP. Missing DS records cause validation failure, NSEC exposure is a privacy concern not a resolution failure, and SOA TTL affects zone refresh not resolution — EDNS0 support for large DNSSEC records is the core issue."
+  },
+  {
+    "d": 5,
+    "q": "A security analyst examines a firewall log and notices a pattern of TCP RST packets being sent to a specific host after it attempts to connect to certain external IPs. The RST packets arrive within milliseconds, faster than round-trip time to the destination. What does this indicate?",
+    "o": [
+      "The destination hosts are actively rejecting the connections",
+      "An inline packet injection device (such as a national firewall) is injecting TCP RST packets to disrupt the connections before they complete",
+      "The local firewall is blocking the connections with RST",
+      "The TCP stack on the client is misconfigured"
+    ],
+    "a": 1,
+    "e": "TCP RST packets arriving faster than the physical round-trip time to the destination cannot come from the destination — they must be injected by an inline or near-path device that monitors traffic and injects RST packets to terminate connections. This is a known technique used by national-level censorship systems (e.g., the Great Firewall) and some DPI appliances. The local firewall would generate a local reset (no RTT needed), destination rejection would arrive after at least one RTT, and a misconfigured TCP stack would not produce RSTs below RTT — sub-RTT RSTs indicate packet injection by an intermediary."
+  },
+  {
+    "d": 4,
+    "q": "An organization configures HSTS (HTTP Strict Transport Security) with a max-age of 31536000 and includeSubDomains, and submits to the HSTS preload list. A subdomain 'dev.example.com' is used only for internal testing and has a self-signed certificate. What problem does this create?",
+    "o": [
+      "HSTS prevents any HTTP traffic, which has no effect on HTTPS subdomains",
+      "The HSTS preload entry with includeSubDomains forces browsers to require valid TLS on ALL subdomains including dev.example.com, breaking access to the self-signed internal subdomain from any browser that has preloaded the policy",
+      "HSTS max-age determines how long the certificate is valid",
+      "The preload list only affects the apex domain, not subdomains"
+    ],
+    "a": 1,
+    "e": "HSTS with includeSubDomains and preload list submission means every browser that respects the preload list (virtually all modern browsers) will require valid, browser-trusted TLS on every subdomain. A self-signed certificate on dev.example.com will be rejected with no bypass option — HSTS preload cannot be overridden by the user. HSTS doesn't affect certificate validity periods, and the preload list with includeSubDomains explicitly does cover all subdomains — the combination of preloading + includeSubDomains + untrusted subdomain certificate is the problem."
+  },
+  {
+    "d": 5,
+    "q": "A network uses 802.1X with EAP-TLS for wired authentication. An attacker physically accesses an authenticated port and plugs in a device that bridges the authenticated client to their own laptop. The attacker can now communicate on the network. Which attack technique is being used and which 802.1X limitation does it expose?",
+    "o": [
+      "MAC spoofing; 802.1X should use RADIUS accounting to prevent this",
+      "802.1X bypass via physical bridging (transparent bridge/hub); 802.1X only authenticates the first device on the port and doesn't re-authenticate or traffic-analyze additional devices joining via a hub",
+      "PEAP downgrade; 802.1X should enforce certificate pinning",
+      "VLAN hopping; 802.1X VLAN assignment prevents this"
+    ],
+    "a": 1,
+    "e": "802.1X authenticates at the port level — once a port is authenticated, any device plugged into a hub/bridge at that port can communicate. This is a known architectural limitation: 802.1X doesn't continuously monitor whether the communicating device is the originally authenticated one. Physical bridging exploits this by inserting a transparent bridge between the legitimate client and the switch, allowing a rogue device on the hub to inherit port access. MAC spoofing differs in not requiring physical access, certificate pinning doesn't solve physical bridging, and VLAN assignment doesn't prevent additional devices — physical bridging exploiting 802.1X's port-level (not per-device) authentication is the attack."
+  },
+  {
+    "d": 4,
+    "q": "A company uses a split-DNS configuration where internal clients receive internal IP addresses for corporate hostnames, and external clients receive public IPs. An attacker performs DNS rebinding against an internal developer's browser. What is the attacker's goal?",
+    "o": [
+      "To inject malware into the developer's DNS cache",
+      "To bypass the browser Same-Origin Policy and access internal services by making the browser believe an attacker-controlled site is the same origin as an internal resource",
+      "To perform a distributed denial of service against the internal DNS server",
+      "To steal the developer's VPN credentials via a phishing page"
+    ],
+    "a": 1,
+    "e": "DNS rebinding attacks work by first resolving an attacker-controlled domain to the attacker's IP (getting the browser to load malicious content), then quickly rebinding the domain to an internal IP (e.g., 192.168.1.1). The browser, obeying Same-Origin Policy using domain names, now considers the internal resource the 'same origin' as the attacker's page, allowing JavaScript to make requests to internal services. DNS cache poisoning is different, DDoS against the DNS server is unrelated, and phishing steals credentials directly — bypassing SOP to access internal services is DNS rebinding's specific goal."
+  },
+  {
+    "d": 5,
+    "q": "A security researcher examines a web application and crafts the payload: username=admin'-- -&password=anything. The application returns a successful login response. Which secondary vulnerability or finding MOST critically indicates the severity beyond simple authentication bypass?",
+    "o": [
+      "The application is vulnerable to XSS because apostrophes are allowed in usernames",
+      "The application is vulnerable to stacked queries, meaning the attacker can potentially execute arbitrary SQL commands including INSERT, UPDATE, and DROP",
+      "The application uses MD5 password hashing, which can be cracked",
+      "The application does not implement CSRF protection on the login form"
+    ],
+    "a": 1,
+    "e": "A comment-based SQLi bypass (admin'-- -) proves injectable input, but the most critical additional finding would be whether the database supports stacked queries (multiple statements separated by semicolons). If so, the attacker can execute arbitrary SQL beyond SELECT, enabling data modification, schema destruction, or even OS command execution via xp_cmdshell (MSSQL). XSS is a separate vulnerability not indicated here, MD5 hashing relates to offline cracking not the injected session, and missing CSRF is less severe than arbitrary SQL execution — stacked query capability dramatically elevates the severity."
+  },
+  {
+    "d": 5,
+    "q": "A penetration tester discovers a REST API that uses JWT tokens for authentication. The tester modifies the JWT header to set 'alg: none' and removes the signature. The API accepts the modified token and returns data. What vulnerability is present and why does this work?",
+    "o": [
+      "The JWT secret key is weak and easily guessable",
+      "The API accepts unsigned tokens because it fails to reject the 'alg: none' algorithm, which indicates no signature verification is performed",
+      "The JWT is using RS256 and the public key was embedded in the token",
+      "The API uses symmetric HMAC but the tester correctly guessed the secret"
+    ],
+    "a": 1,
+    "e": "The 'alg: none' JWT attack exploits libraries that honor the algorithm specified in the JWT header. If the library accepts 'none' as a valid algorithm, it skips signature verification entirely, trusting any claims in the payload. A properly implemented library should reject 'none' and enforce a specific expected algorithm. A weak secret would require cracking, not removing the signature; RS256 has a separate header-injection attack (alg confusion); and guessing the HMAC secret would require a brute-force, not a signature removal — accepting 'alg: none' without rejection is the specific library flaw."
+  },
+  {
+    "d": 5,
+    "q": "An application serializes user session data using Java's native serialization and stores it in a cookie. A security researcher crafts a malicious serialized object that, when deserialized by the server, triggers a method chain (gadget chain) resulting in remote code execution. Which vulnerability class does this fall under?",
+    "o": [
+      "Cross-site scripting (XSS)",
+      "Insecure deserialization",
+      "SQL injection",
+      "Command injection via cookie parsing"
+    ],
+    "a": 1,
+    "e": "Insecure deserialization occurs when an application deserializes data from an untrusted source without validation. Java's native serialization can be exploited via gadget chains — sequences of existing classes in the classpath whose methods, when invoked during deserialization, chain together to produce arbitrary code execution. XSS injects scripts into browsers, SQL injection manipulates database queries, and command injection passes input to system shells — exploiting deserialization gadget chains for RCE is insecure deserialization."
+  },
+  {
+    "d": 5,
+    "q": "A web application uses the following header: 'Content-Security-Policy: default-src https:'. A security researcher demonstrates XSS despite this policy. Which CSP bypass technique is MOST likely being used?",
+    "o": [
+      "The attacker bypassed TLS to inject scripts",
+      "The CSP allows loading scripts from any HTTPS source, so the attacker hosts a malicious script on any HTTPS URL they control or uses a legitimate HTTPS CDN that allows arbitrary user content",
+      "The attacker used the 'unsafe-inline' directive",
+      "The CSP was only applied to the main frame, not iframes"
+    ],
+    "a": 1,
+    "e": "A CSP of 'default-src https:' allows loading resources from any HTTPS URL. An attacker can host a malicious script at any HTTPS URL they own, or leverage a CDN/storage service (e.g., Google Storage, Azure Blob) that serves user-uploadable files over HTTPS, to execute arbitrary JavaScript. 'unsafe-inline' would need to be explicitly in the policy to be used, frame inheritance is a different issue, and bypassing TLS is not a CSP bypass — allowing any HTTPS origin is a fatally broad CSP that enables this bypass."
+  },
+  {
+    "d": 4,
+    "q": "A developer implements OAuth 2.0 authorization code flow and does not validate the 'state' parameter returned by the authorization server. An attacker sends a victim a crafted link that initiates the OAuth flow. When the victim authenticates, the attacker intercepts the authorization code. Which attack is this?",
+    "o": [
+      "CSRF on the OAuth callback endpoint, allowing the attacker to link their account to the victim's identity",
+      "Open redirect in the OAuth provider",
+      "Token hijacking via TLS interception",
+      "SQL injection in the authorization server"
+    ],
+    "a": 0,
+    "e": "The 'state' parameter in OAuth 2.0 is a CSRF token — it binds the authorization request to the specific user session. Without state validation, an attacker can initiate an OAuth flow themselves, send the victim a link that uses the attacker's authorization request, and when the victim authenticates, link the victim's account to the attacker's identity (account takeover) or inject the attacker's authorization code into the victim's session. This is a CSRF attack on the OAuth callback. Open redirect and TLS interception are separate issues, and SQL injection is unrelated — missing state validation enables OAuth CSRF."
+  },
+  {
+    "d": 5,
+    "q": "An organization uses Azure AD as its IdP. A security engineer discovers that a registered application has the 'Application' permission 'Mail.Read' on the Microsoft Graph API (not Delegated). An attacker compromises the application's client secret. What is the MOST severe capability the attacker gains?",
+    "o": [
+      "The ability to read only the mail of the user who consented to the application",
+      "The ability to read the mail of any user in the tenant without user interaction, because Application permissions operate with app-level identity rather than on behalf of a specific user",
+      "The ability to send mail as the application's service account",
+      "The ability to read only unread mail in the shared mailbox"
+    ],
+    "a": 1,
+    "e": "Microsoft Graph 'Application' permissions (as opposed to 'Delegated' permissions) allow the application to act with its own identity and access resources for any user in the tenant, without requiring user consent or interaction. Mail.Read as an Application permission allows reading every user's mailbox. Delegated permissions would limit access to the consenting user's mail. The difference between Application and Delegated Graph permissions — and the tenant-wide scope of Application permissions — is critical to understanding the blast radius of a compromised app secret."
+  },
+  {
+    "d": 5,
+    "q": "A SAML IdP is configured to sign only the SAML Response element, but not the individual Assertion element within it. A penetration tester demonstrates that they can modify claims in the Assertion (such as the NameID or group membership attributes) without breaking the Response signature. Why does this work?",
+    "o": [
+      "SAML does not support signing individual elements",
+      "The SP validates only the Response signature but not the Assertion's content integrity; since the Assertion itself is unsigned, its content can be altered without invalidating the Response-level signature",
+      "The tester exploited a padding oracle in the SAML signature algorithm",
+      "SAML assertions do not contain group membership attributes"
+    ],
+    "a": 1,
+    "e": "SAML supports signing at both the Response and Assertion levels independently. If only the Response is signed, the Assertion (which contains identity claims) is not cryptographically protected. An attacker can modify the Assertion content after the Response signature is validated, injecting privilege attributes or changing the NameID to impersonate another user. SAML does support element-level signing, no padding oracle is needed, and SAML assertions can contain any attribute including group membership — the structural gap between Response and Assertion signing creates this vulnerability."
+  },
+  {
+    "d": 4,
+    "q": "An organization implements FIDO2/WebAuthn for passwordless authentication. A user's authenticator (USB security key) is stolen. The attacker has physical possession of the key but not the user's PIN. Which statement MOST accurately describes the security impact?",
+    "o": [
+      "The attacker can immediately authenticate as the user because physical possession of the key is sufficient",
+      "If the key uses a PIN or biometric for user verification, the attacker cannot use it without that second factor; the key's private key never leaves the hardware boundary",
+      "The attacker can extract the private key from the USB device using hardware tools",
+      "The attacker can replay previously captured WebAuthn assertions to authenticate"
+    ],
+    "a": 1,
+    "e": "FIDO2 authenticators with User Verification (UV) require a PIN or biometric before signing authentication challenges — the key is functionally useless without it. The private key is generated on-device in tamper-resistant hardware and never exported. WebAuthn challenges are unique per-authentication and include the origin, preventing replay. Hardware extraction from certified authenticators is extremely difficult and not feasible for typical attackers. Physical possession alone is insufficient — UV protects the key from use without the PIN."
+  },
+  {
+    "d": 5,
+    "q": "An organization uses a privileged access workstation (PAW) for all administrative tasks. A threat actor compromises a tier-0 admin's PAW through a malicious PDF opened in a browser. Which PAW hardening control would MOST effectively have prevented this initial compromise?",
+    "o": [
+      "Enforcing complex passwords for the local admin account",
+      "Application allowlisting (e.g., Windows Defender Application Control) preventing execution of any unsigned or non-allowlisted code, combined with browser restrictions blocking PDF rendering in the browser",
+      "Full disk encryption on the PAW",
+      "Network segmentation preventing PAW from reaching the internet"
+    ],
+    "a": 1,
+    "e": "Application allowlisting (WDAC/AppLocker) prevents execution of non-approved code, and restricting browser capabilities on a PAW (disabling plugins, PDF rendering, or blocking internet browsing entirely) eliminates the attack surface for browser-based exploitation. Complex passwords don't prevent code execution via a PDF exploit, FDE protects data at rest not running exploits, and network segmentation alone doesn't prevent executing a locally opened malicious PDF — allowlisting + browser restrictions most directly prevent this attack vector."
+  },
+  {
+    "d": 5,
+    "q": "A CISO presents to the board that the organization's current control environment results in a residual risk ALE of $2.4M annually. Implementing a new SIEM+SOAR would cost $800K/year and reduce ALE by 60%. A cyber insurance policy for $2M coverage costs $180K/year. Which combination provides the BEST risk-adjusted return?",
+    "o": [
+      "Insurance only: $180K cost, $2M coverage",
+      "SIEM+SOAR only: $800K cost, reduces ALE by $1.44M — net benefit $640K/year",
+      "Both SIEM+SOAR and insurance: $980K combined cost, ALE reduced by $1.44M to $960K — net benefit $460K vs baseline",
+      "Neither; the residual risk is acceptable at $2.4M"
+    ],
+    "a": 1,
+    "e": "SIEM+SOAR costs $800K and reduces ALE by 60% of $2.4M = $1.44M. Net benefit = $1.44M - $800K = $640K/year positive return on investment. Insurance at $180K covers $2M but does not reduce ALE (just transfers financial impact), providing coverage but no operational risk reduction or positive ROI on ALE reduction. The combined option costs $980K and produces a $460K net benefit — less efficient. Accepting $2.4M ALE is worse than the SIEM+SOAR option — SIEM+SOAR alone provides the best risk-adjusted return."
+  },
+  {
+    "d": 4,
+    "q": "A company's legal team informs the CISO that due to ongoing litigation, all emails and documents referencing a specific project must be preserved and cannot be deleted for the duration of proceedings. The normal 90-day automatic email deletion policy must be suspended for affected accounts. Which two actions are MOST critical to take immediately?",
+    "o": [
+      "Encrypt all project-related emails and update the data retention policy",
+      "Issue a legal hold notice to IT and custodians of the relevant data, then configure the email system to suspend automatic deletion for identified accounts",
+      "Back up all company email to tape and discontinue the deletion policy company-wide",
+      "Notify all employees of the litigation and instruct them to self-preserve relevant documents"
+    ],
+    "a": 1,
+    "e": "A legal hold requires immediately notifying IT and data custodians (the people who control the data) and technically enforcing the hold by suspending automated deletion for the specifically identified accounts and data. Encrypting emails and updating a policy document are insufficient without technical enforcement, suspending deletion company-wide is overbroad and operationally disruptive, and relying on employee self-preservation is unreliable and legally insufficient — formal notification plus technical suspension of deletion is the correct immediate response."
+  },
+  {
+    "d": 5,
+    "q": "A company processes EU personal data. After a data breach, the CISO discovers that the company processes data under a third-party controller's instructions and has a Data Processing Agreement (DPA) in place. Under GDPR, which party MUST notify the supervisory authority within 72 hours?",
+    "o": [
+      "The data processor (the company), because they discovered the breach",
+      "The data controller, because GDPR Article 33 requires the controller to notify the supervisory authority; the processor must notify the controller without undue delay after becoming aware",
+      "Both the processor and controller must independently notify the supervisory authority",
+      "Neither, because a DPA transfers liability entirely to the controller"
+    ],
+    "a": 1,
+    "e": "Under GDPR Article 33, the data controller is responsible for notifying the supervisory authority within 72 hours. Article 28 requires the processor to notify the controller 'without undue delay' after discovering the breach, so the controller can fulfill their Article 33 obligation. The processor does not independently notify the authority; the controller does. A DPA doesn't transfer liability to the controller entirely — both have responsibilities but the supervisory authority notification obligation rests with the controller."
+  },
+  {
+    "d": 4,
+    "q": "An organization's security program uses FAIR (Factor Analysis of Information Risk) methodology. An analyst is calculating the risk of a ransomware attack on a critical server. Which pair of inputs is MOST foundational to FAIR's quantitative risk calculation?",
+    "o": [
+      "CVSS score and asset value",
+      "Loss Event Frequency (LEF) and Loss Magnitude (LM)",
+      "Annualized Rate of Occurrence (ARO) and Single Loss Expectancy (SLE) — which are equivalent to FAIR inputs",
+      "Threat Capability and Control Strength"
+    ],
+    "a": 1,
+    "e": "FAIR (Factor Analysis of Information Risk) is built on two foundational components: Loss Event Frequency (how often a loss event occurs, derived from Threat Event Frequency and Vulnerability) and Loss Magnitude (how much is lost per event, including primary and secondary losses). The final risk output is LEF × LM. ARO and SLE are related qualitative concepts but not FAIR's specific terminology. CVSS is a vulnerability severity score, not a FAIR input. Threat Capability and Control Strength feed into LEF calculation but aren't the final risk formula pair — LEF and LM are the core FAIR equation."
+  },
+  {
+    "d": 5,
+    "q": "A security team discovers that a water treatment facility's SCADA system communicates with PLCs using Modbus TCP, and a historian server on the OT network forwards process data to the corporate IT network via a standard TCP connection. An attacker on the IT network exploits the historian to send forged Modbus write commands to chlorine dosing PLCs. Which defense would MOST effectively prevent this specific attack path?",
+    "o": [
+      "Deploying IDS sensors on the IT network",
+      "Replacing the bidirectional historian TCP connection with a unidirectional data diode that only allows data to flow from OT to IT, preventing any inbound connections from IT to OT",
+      "Requiring VPN for IT users accessing the historian",
+      "Encrypting all Modbus TCP traffic"
+    ],
+    "a": 1,
+    "e": "A data diode is a hardware device that physically enforces one-way data flow — OT process data flows to IT for analysis, but no data or commands can travel from IT to OT. This breaks the attack path regardless of what the attacker does on the IT network or historian. IDS on IT detects but doesn't prevent the attack, VPN for IT users doesn't prevent an already-compromised IT host from attacking OT, and Modbus TCP has no authentication so encryption alone doesn't prevent forged commands from a compromised network path — the data diode physically eliminates the bidirectional attack surface."
+  },
+  {
+    "d": 5,
+    "q": "In the Purdue Model for ICS security, a 'demilitarized zone' (DMZ) is typically placed between which levels?",
+    "o": [
+      "Level 0 (Process) and Level 1 (Basic Control)",
+      "Level 2 (Supervisory Control) and Level 3 (Site Operations) and Level 4 (Business Planning)",
+      "Level 4 (Business Planning) and Level 5 (Enterprise)",
+      "Level 1 and Level 2"
+    ],
+    "a": 1,
+    "e": "In the Purdue Model, the ICS DMZ is positioned between Level 3 (Site Operations — SCADA/DCS) and Level 4 (Business Planning — corporate IT/ERP), serving as a buffer zone where data historians and application servers can receive OT data and serve it to IT without direct connectivity between the two networks. Levels 0–2 are the process and control layers, Level 4+ is IT — the DMZ between Level 3/OT and Level 4/IT is the standard placement."
+  },
+  {
+    "d": 4,
+    "q": "An ICS security engineer is reviewing a proposed architecture where remote vendor access to PLCs is provided over a direct internet-facing RDP connection to a jump server in the OT network. Which two risks are MOST critical to address?",
+    "o": [
+      "The RDP session may be slow due to network latency",
+      "Internet-exposed RDP is a top attack vector for ransomware and remote exploitation; the jump server should be moved behind a VPN with MFA, and RDP to the jump server should not be directly exposed to the internet",
+      "RDP uses UDP which is incompatible with some ICS protocols",
+      "Vendor access may violate software licensing agreements"
+    ],
+    "a": 1,
+    "e": "Internet-exposed RDP is among the most exploited services globally — it is a primary entry point for ransomware attacks (BlueKeep, RDPwned campaigns). In an OT environment, a breach via this vector could directly impact physical processes. The correct architecture requires vendors to authenticate via a VPN with MFA before reaching the jump server, which should be on a separate vendor-access VLAN. RDP latency, UDP compatibility (RDP uses TCP), and licensing are not the critical security risks — direct internet exposure of RDP is the critical vulnerability."
+  },
+  {
+    "d": 5,
+    "q": "A Certificate Transparency (CT) log monitoring system alerts that a new certificate for 'internal-payroll.company.com' was issued by a public CA and logged in CT logs. The organization did not request this certificate. What does this MOST likely indicate?",
+    "o": [
+      "The monitoring system has a false positive due to CT log replication lag",
+      "A CA was fraudulently induced to issue a certificate for the organization's domain (rogue certificate issuance), enabling HTTPS interception or phishing with a trusted cert",
+      "The certificate was automatically renewed by the organization's ACME automation",
+      "The CT log entry was injected by the monitoring vendor for testing"
+    ],
+    "a": 1,
+    "e": "Certificate Transparency logs record every certificate issued by participating CAs, enabling domain owners to detect unauthorized certificate issuance. An unexpected certificate for an internal domain issued by a public CA indicates either a compromised CA, domain validation bypass, or social engineering against the CA (misissuance). This enables the holder to intercept HTTPS traffic or conduct trusted phishing. CT replication lag doesn't produce phantom certificates, unauthorized internal domains wouldn't trigger ACME renewal, and monitoring vendors don't inject real CT entries — unauthorized CA-issued certificates are the definition of misissuance."
+  },
+  {
+    "d": 5,
+    "q": "A web server presents a certificate chain: End-Entity → Intermediate CA → Root CA. The root CA certificate is in the browser's trust store. The intermediate CA certificate is not sent by the server. A browser reports 'certificate chain incomplete.' Why does this error occur and what is the server-side fix?",
+    "o": [
+      "The root CA has expired; renew it",
+      "Browsers cannot download intermediate CA certificates from AIA extensions in all scenarios; the server must include the full certificate chain (end-entity + all intermediate CAs, excluding root) in its TLS configuration",
+      "The browser trust store needs to be updated to include the intermediate CA",
+      "The end-entity certificate must be reissued with a shorter validity period"
+    ],
+    "a": 1,
+    "e": "Browsers may try to download missing intermediate certificates via the AIA (Authority Information Access) extension, but this is not reliable in all environments (firewalled clients, mobile devices, slow connections). The correct practice is to configure the server to serve the full chain — the end-entity certificate plus all intermediate CA certificates, but NOT the root CA (which must already be in the trust store). The root CA is not expired in this scenario, updating trust stores is a client-side fix for a server-side omission, and reissuing the certificate doesn't fix a missing chain."
+  },
+  {
+    "d": 4,
+    "q": "A CA performs a key ceremony for generating a new offline root CA private key. Which combination of controls is MOST critical for ensuring the ceremony's integrity and auditability?",
+    "o": [
+      "Using a 4096-bit RSA key and storing it on a USB drive",
+      "Conducting the ceremony in an air-gapped, physically secure room with multiple independent witnesses, video recording, documented procedures, M-of-N secret sharing for the key, and tamper-evident HSM storage",
+      "Encrypting the private key with AES-256 and emailing it to the security team",
+      "Using a cloud HSM for convenience and remote access"
+    ],
+    "a": 1,
+    "e": "A root CA key ceremony requires extraordinary controls because the root key's compromise undermines the entire PKI. Best practices include: physical security of the room, multiple independent witnesses (ensuring no single person controls the key), M-of-N secret sharing (e.g., 3-of-5 keyholders needed to use the key), video recording for auditability, documented formal procedures, and HSM storage. A USB drive and RSA key size alone are grossly insufficient, emailing a private key is catastrophic, and a cloud HSM for an offline root CA defeats the air-gap requirement — the comprehensive ceremony controls are necessary."
+  },
+  {
+    "d": 5,
+    "q": "A malware sample uses an API hooking technique to intercept calls to 'NtQuerySystemInformation' from the Windows kernel and filters out its own process from the returned process list. Which anti-analysis technique is being employed?",
+    "o": [
+      "Process injection",
+      "User-mode rootkit via SSDT hook or inline hook, specifically hiding processes from task manager and forensic tools",
+      "DLL side-loading",
+      "Living-off-the-land"
+    ],
+    "a": 1,
+    "e": "Hooking NtQuerySystemInformation (or its Win32 wrapper) to remove specific processes from the returned list is a classic user-mode rootkit technique. It intercepts the system call in ntdll.dll via inline hooks or IAT hooks and filters the malware's own PID from enumeration results, hiding it from Task Manager, Process Explorer, and basic forensic tools. Process injection loads code into another process, DLL side-loading hijacks legitimate DLL loading paths, and LOTL uses built-in tools — API hooking to hide a process is a user-mode rootkit technique."
+  },
+  {
+    "d": 5,
+    "q": "A malware analyst opens a suspicious binary in a disassembler and notices the code checks for the presence of certain registry keys (e.g., HKLM\\SOFTWARE\\VMware, Inc.\\VMware Tools), CPUID returns, and very small disk size before executing its payload. What technique is this and what should the analyst do?",
+    "o": [
+      "Anti-debugging; the analyst should patch the binary to skip checks",
+      "Virtual machine / sandbox detection (anti-VM evasion); the analyst should analyze the malware on bare-metal hardware or configure the sandbox to spoof VM artifacts",
+      "Code obfuscation; the analyst should run a deobfuscation script",
+      "Living-off-the-land detection; the analyst should disable Windows Defender"
+    ],
+    "a": 1,
+    "e": "Checking VMware registry keys, CPUID virtualization flags, and disk size are classic VM/sandbox detection techniques — the malware refuses to execute its real payload if it detects it is running in an analysis environment. Anti-debugging typically involves timing checks or API calls like IsDebuggerPresent, code obfuscation obscures logic visually, and LOTL is about using system tools — to analyze this malware, the analyst should use bare-metal hardware or configure their sandbox to spoof hardware characteristics that bypass these VM checks."
+  },
+  {
+    "d": 4,
+    "q": "A threat intelligence report describes malware that achieves persistence by modifying the 'Image File Execution Options' (IFEO) registry key for sethc.exe (Sticky Keys), replacing it with cmd.exe. What can an attacker accomplish with this technique on a locked Windows system?",
+    "o": [
+      "The attacker can decrypt BitLocker volumes remotely",
+      "The attacker can trigger a SYSTEM-level command prompt on the login screen before authentication by pressing Shift 5 times, bypassing authentication entirely",
+      "The attacker can modify Active Directory via the registry",
+      "The attacker gains persistence that survives OS reinstall"
+    ],
+    "a": 1,
+    "e": "IFEO hijacking on sethc.exe (Sticky Keys — invoked by pressing Shift 5 times) replaces the accessibility feature with cmd.exe. On the Windows login screen (before authentication), pressing Shift 5 times now opens cmd.exe running as SYSTEM, bypassing authentication. This is a well-known persistence and backdoor technique (similar attacks target utilman.exe, osk.exe). BitLocker decryption requires the recovery key, AD modification requires domain credentials, and this technique doesn't survive OS reinstall (it's in the registry) — pre-auth SYSTEM shell via Sticky Keys hijacking is the capability."
+  },
+  {
+    "d": 5,
+    "q": "A KRACK (Key Reinstallation Attack) exploits a weakness in the WPA2 four-way handshake. Which specific aspect of the handshake does KRACK exploit?",
+    "o": [
+      "KRACK brute-forces the WPA2 PSK offline using a captured 4-way handshake",
+      "KRACK forces nonce reuse by replaying handshake message 3, causing the client to reinstall an already-used key and resetting associated counters (nonce/replay counter), enabling decryption or injection",
+      "KRACK exploits a weakness in TKIP's MIC algorithm to forge packets",
+      "KRACK intercepts the PMKID to recover the PSK without requiring a connected client"
+    ],
+    "a": 1,
+    "e": "KRACK (CVE-2017-13077 et al.) exploits the WPA2 handshake by replaying handshake message 3 (which contains the PTK/GTK) — the standard permits retransmission if ACK is not received. The victim reinstalls the key, resetting the nonce/replay counter to its previous value. This nonce reuse allows the attacker to decrypt traffic or inject packets. Offline PSK brute-force requires the 4-way handshake but is a different attack, TKIP MIC attacks are different weaknesses, and PMKID attacks (Hcxdumptool) capture the PMKID from beacon/probe frames for offline cracking — nonce reuse via key reinstallation is KRACK's specific mechanism."
+  },
+  {
+    "d": 4,
+    "q": "An enterprise wireless deployment uses WPA3-Enterprise with 192-bit security mode. Which specific suite of cryptographic algorithms does this mode mandate?",
+    "o": [
+      "CCMP-128 with HMAC-SHA-1 and RSA-2048",
+      "GCMP-256 with HMAC-SHA-384, and ECC-384 or RSA-3072 for key management (CNSA Suite compliant)",
+      "TKIP with SHA-256 and AES-128",
+      "CCMP-256 with HMAC-SHA-256 and RSA-2048"
+    ],
+    "a": 1,
+    "e": "WPA3-Enterprise 192-bit security mode mandates GCMP-256 for data encryption, HMAC-SHA-384 for key derivation, and ECC-384 (or RSA-3072) for authentication — aligned with the NSA's Commercial National Security Algorithm (CNSA) Suite designed for protecting classified information. CCMP-128 and TKIP are weaker and don't meet the 192-bit standard, and CCMP-256 with SHA-256 is not the mandated combination for this specific mode."
+  },
+  {
+    "d": 5,
+    "q": "An organization fully implements zero trust for its SaaS application access. An attacker compromises a user's device (which has an up-to-date EDR and passes device health checks) and steals a valid short-lived access token from memory. The zero trust policy requires device health checks and MFA. Which zero trust control gap does this scenario MOST expose?",
+    "o": [
+      "MFA is not implemented correctly",
+      "Zero trust does not prevent token theft and reuse within the token's validity window — continuous session validation or very short token lifetimes are needed to reduce this window",
+      "The EDR failed to detect the compromise",
+      "Device health checks are insufficient without certificate-based device authentication"
+    ],
+    "a": 1,
+    "e": "Zero trust's device health and MFA controls verify identity at authentication time but cannot retroactively invalidate a token already issued if that token is stolen and reused within its validity period. The attacker bypasses ongoing checks by presenting the valid token. This exposes the gap between point-in-time verification and continuous session trust — mitigations include very short token lifetimes (forcing frequent re-authentication), token binding to device/IP, and continuous behavioral monitoring. The other options are valid improvements but the fundamental gap exposed is the validity window of the stolen token."
+  },
+  {
+    "d": 4,
+    "q": "A zero trust architecture uses a Software-Defined Perimeter (SDP). A remote user fails device posture checks (out-of-date OS). Which component enforces the access decision and what happens?",
+    "o": [
+      "The Identity Provider rejects the SAML assertion",
+      "The Policy Enforcement Point denies the TCP connection to the protected resource from completing until the device passes posture checks; the user may be redirected to a remediation portal",
+      "The firewall blocks the user's IP address permanently",
+      "The SIEM generates an alert but access is still granted"
+    ],
+    "a": 1,
+    "e": "In a zero trust SDP, the Policy Enforcement Point (PEP) sits in front of protected resources and only allows connections to pass through after the Policy Engine grants access based on posture, identity, and context. A device failing posture checks causes the PE to deny the request, and the PEP blocks or redirects the connection — typically to a remediation portal. The IdP handles authentication, not posture enforcement; firewalls alone aren't the SDP enforcement layer; and SIEM is a detection tool not an access control enforcer — the PEP is the enforcement mechanism."
+  },
+  {
+    "d": 5,
+    "q": "A security engineer is reviewing a proposed API gateway design. The gateway decrypts TLS, inspects HTTP requests, re-encrypts, and forwards to backend microservices. A threat modeler notes that backend services must trust the gateway's certificate to accept re-encrypted traffic. Which threat does this architecture introduce if the gateway is compromised?",
+    "o": [
+      "Increased latency due to double TLS",
+      "The compromised gateway can perform an on-path attack against all backend communications, decrypting and potentially modifying all inter-service traffic without clients detecting it",
+      "The backend services will reject the re-encrypted traffic",
+      "The gateway cannot handle the certificate load for multiple backend services"
+    ],
+    "a": 1,
+    "e": "When a gateway performs TLS termination and re-encryption, all backend services trust the gateway's certificate. If the gateway is compromised, an attacker can read, modify, or inject any traffic flowing between the gateway and backends — it becomes a trusted on-path position. This is the inherent risk of mTLS termination at a proxy, and mitigations include end-to-end mTLS with per-service certificates bypassing the gateway for sensitive flows. Latency is operational, backends would accept trusted-cert traffic, and certificate management is a scalability concern — the compromise enabling on-path backend access is the security threat."
+  },
+  {
+    "d": 5,
+    "q": "A developer implements a REST API that uses UUIDs as resource identifiers. A penetration tester attempts IDOR by changing UUIDs in API calls and receives 403 Forbidden responses for unauthorized UUIDs but 200 OK only for owned resources. The tester then demonstrates that the application is still vulnerable by observing UUID patterns in responses and predicting future UUIDs. Which underlying cryptographic weakness enables this?",
+    "o": [
+      "The API uses MD5-hashed UUIDs",
+      "The application uses UUID v1 (time-based), where the UUID encodes timestamp and MAC address, making future UUIDs predictable from observed current UUIDs",
+      "The application uses UUIDs that are only 64 bits instead of 128 bits",
+      "The application signs UUIDs with a weak HMAC key"
+    ],
+    "a": 1,
+    "e": "UUID version 1 generates identifiers using the current timestamp and the generating node's MAC address. Since both are predictable/observable, an attacker who observes one UUID v1 can predict past and future UUIDs with high confidence. This allows predicting resource identifiers for objects not yet created or not directly shared. UUID v4 (random) should be used instead. MD5-hashed UUIDs and HMAC signing aren't standard UUID usage here, and UUID length is 128 bits in all versions — UUID v1's timestamp/MAC-based generation makes identifiers predictable."
+  },
+  {
+    "d": 4,
+    "q": "A security team performs threat modeling on a new system using PASTA (Process for Attack Simulation and Threat Analysis). PASTA is a risk-centric methodology. At which stage does PASTA specifically define the attack surface and enumerate potential attack vectors based on the technical architecture?",
+    "o": [
+      "Stage I — Define Objectives",
+      "Stage IV — Threat Analysis",
+      "Stage III — Application Decomposition (Decompose the Application)",
+      "Stage VII — Risk and Impact Analysis"
+    ],
+    "a": 2,
+    "e": "PASTA's Stage III (Application Decomposition) involves decomposing the application into its technical components — identifying data flows, trust boundaries, entry/exit points, and the attack surface. Stage I defines business objectives, Stage IV identifies threats that can exploit the decomposed surface, and Stage VII analyzes and prioritizes risk — decomposing the application to define the attack surface occurs specifically in Stage III."
+  },
+  {
+    "d": 5,
+    "q": "A vulnerability scanner reports a critical (CVSS 9.8) remote code execution vulnerability on a server. The security engineer determines the server is isolated by multiple firewalls with no inbound internet access, requires two-factor authentication, and the vulnerable component handles only internal read-only data. After applying environmental scoring, the adjusted CVSS score drops significantly. Which CVSS metric group provides these contextual adjustments?",
+    "o": [
+      "Temporal metrics only",
+      "Environmental metrics (Modified Base metrics and Security Requirements)",
+      "Base metrics",
+      "Exploitability metrics"
+    ],
+    "a": 1,
+    "e": "CVSS Environmental metrics allow organizations to modify base scores based on their specific environment — applying modified attack vector (network isolation lowers this), modified privileges required, and confidentiality/integrity/availability requirements specific to the asset. Temporal metrics reflect time-dependent factors like exploit code availability and patch availability. Base metrics are fixed to the vulnerability's inherent characteristics regardless of environment. Exploitability is a sub-group within base metrics — contextual adjustments for network isolation, authentication requirements, and data sensitivity are Environmental metrics."
+  },
+  {
+    "d": 5,
+    "q": "An organization uses a Vulnerability Priority Rating (VPR) system rather than CVSS for patch prioritization. What is the PRIMARY advantage of VPR over CVSS base scores for prioritization?",
+    "o": [
+      "VPR scores are always higher than CVSS scores",
+      "VPR incorporates threat intelligence about real-world exploitation activity (e.g., whether exploit code is actively being used in attacks), producing a dynamic score that reflects current actual risk rather than theoretical maximum impact",
+      "VPR is vendor-neutral and CVSS is proprietary",
+      "VPR measures only network-accessible vulnerabilities"
+    ],
+    "a": 1,
+    "e": "VPR (Tenable's Vulnerability Priority Rating) dynamically incorporates threat intelligence — including whether exploit code exists, whether it is being actively exploited in the wild, and exploit maturity — to produce a score that reflects real-world risk. CVSS base scores are static and don't change based on actual exploitation activity. VPR scores are not inherently higher, both systems are widely used, and VPR covers all vulnerability types — the dynamic threat intelligence integration that makes VPR reflect current actual exploitation risk is its primary advantage."
+  },
+  {
+    "d": 4,
+    "q": "A security engineer discovers that an application uses the Apache Log4j library (version 2.14) in a container that has no outbound internet access. A CVSS 10.0 CVE (Log4Shell) exists for this version. The engineer argues the actual exploitability is significantly lower in this environment. Which combination of factors MOST directly reduces exploitability?",
+    "o": [
+      "The container uses OpenJDK which is immune to Log4Shell",
+      "The lack of outbound network connectivity prevents the JNDI callback needed to deliver the malicious payload, and network-based WAF inspection can detect the exploit string in inbound requests",
+      "The CVSS score would be automatically reduced by the scanner",
+      "Containers are not affected by Java vulnerabilities"
+    ],
+    "a": 1,
+    "e": "Log4Shell (CVE-2021-44228) works by logging a specially crafted string that triggers a JNDI lookup to an attacker-controlled server, which delivers a malicious Java class. If the container has no outbound internet access, the JNDI callback cannot complete and the exploit fails. WAF rules detecting '${jndi:' patterns in inbound requests add another layer. OpenJDK is affected (it's standard Java), CVSS scores don't change automatically based on environment, and containers are not inherently immune to Java vulnerabilities — outbound network restriction breaking the JNDI callback is the primary exploitability reducer."
+  },
+  {
+    "d": 5,
+    "q": "An organization transfers personal data from the EU to a US-based vendor. The EU-US Privacy Shield has been invalidated. The company uses Standard Contractual Clauses (SCCs). A data protection authority audits the transfer. What additional assessment is NOW required alongside SCCs to demonstrate lawfulness of the transfer?",
+    "o": [
+      "A DPIA (Data Protection Impact Assessment) for all transfers",
+      "A Transfer Impact Assessment (TIA) evaluating whether US surveillance laws undermine the protections offered by the SCCs, and implementing supplementary measures if the TIA identifies gaps",
+      "Approval from every data subject whose data is transferred",
+      "A binding corporate rule signed by the US vendor"
+    ],
+    "a": 1,
+    "e": "Following the Schrems II ruling (which invalidated Privacy Shield), the European Data Protection Board issued guidance requiring that transfers based on SCCs must be accompanied by a Transfer Impact Assessment (TIA) evaluating the laws of the destination country — particularly surveillance laws — to verify that the SCC protections are not undermined. If the TIA identifies gaps, supplementary measures (encryption, pseudonymization) must be implemented. A DPIA applies to high-risk processing generally but isn't the specific post-Schrems II requirement for international transfers, data subject consent for all transfers is impractical, and BCRs are for intra-group transfers — TIA + supplementary measures is the post-Schrems II requirement."
+  },
+  {
+    "d": 4,
+    "q": "An organization's CISO is implementing a privacy-by-design program. Which statement MOST accurately describes the 'proactive not reactive' principle of Privacy by Design?",
+    "o": [
+      "Privacy controls should be added after a breach is detected to prevent future incidents",
+      "Privacy should be designed into systems from inception rather than bolted on after the fact; privacy risks should be anticipated and prevented before they materialize",
+      "Privacy requirements should only be addressed when a regulatory audit is scheduled",
+      "Privacy controls should react automatically to detected violations using SOAR playbooks"
+    ],
+    "a": 1,
+    "e": "Privacy by Design's 'Proactive not Reactive; Preventative not Remedial' principle means privacy is embedded into the system architecture at the beginning of the design process, not added as an afterthought or only after a problem occurs. Post-breach controls, audit-driven privacy, and automated SOAR responses all represent reactive approaches — building privacy in from the start as a default state is the proactive principle."
+  },
+  {
+    "d": 5,
+    "q": "A threat actor adds imperceptible perturbations to input images submitted to an organization's AI-based facial recognition system, causing the model to consistently misclassify the attacker as an authorized user. This attack is classified as:",
+    "o": [
+      "Model inversion attack",
+      "Adversarial example / adversarial input attack against a machine learning model",
+      "Model poisoning attack",
+      "Data exfiltration via steganography"
+    ],
+    "a": 1,
+    "e": "Adversarial examples are inputs crafted with deliberate small perturbations (often imperceptible to humans) that cause machine learning models to make incorrect predictions. This is distinct from model inversion (reconstructing training data from model outputs), model poisoning (corrupting training data to affect future model behavior), and steganography — crafting inputs to fool a deployed model during inference is an adversarial example attack."
+  },
+  {
+    "d": 4,
+    "q": "A red team uses a technique called 'prompt injection' against an organization's AI-powered customer service chatbot. The attacker embeds hidden instructions in user-supplied content that override the chatbot's system prompt. What is the MOST direct risk this creates?",
+    "o": [
+      "The chatbot's vector database is corrupted",
+      "The attacker can manipulate the chatbot to exfiltrate data accessible to it, bypass content filters, impersonate the organization, or take unintended actions within its permission scope",
+      "The chatbot's training data is permanently modified",
+      "The AI model's weights are extracted via the chat interface"
+    ],
+    "a": 1,
+    "e": "Prompt injection allows attackers to override or hijack an LLM's instructions by embedding adversarial directives in user input. If the chatbot has access to data or can take actions (query databases, send emails, call APIs), the attacker can leverage its permission scope to exfiltrate information, bypass restrictions, or take unauthorized actions. Training data and model weights are not modified in real time via the chat interface, and vector database corruption is a different attack — abusing the chatbot's access and capabilities through injected instructions is the direct risk."
+  },
+  {
+    "d": 5,
+    "q": "An attacker compromises an internal Certificate Authority and issues a certificate for 'login.paypal.com' with an extended validation (EV) certificate appearance. The attacker intercepts a user's HTTPS traffic. Which control would MOST effectively have detected or prevented the fraudulent certificate?",
+    "o": [
+      "The user's browser certificate pinning for paypal.com",
+      "Certificate Transparency log monitoring combined with CAA (Certification Authority Authorization) DNS records restricting which CAs may issue for the domain",
+      "DNSSEC on the organization's internal DNS",
+      "Using a VPN to encrypt all traffic"
+    ],
+    "a": 1,
+    "e": "CAA records specify which CAs are authorized to issue certificates for a domain — an internal CA would not be listed as an authorized issuer for paypal.com, and a CA checking CAA records should refuse to issue. Certificate Transparency would log the issuance, making it detectable. Browser certificate pinning for paypal.com would also detect the fraudulent cert, but this relies on browsers implementing pins (mainly effective for HPKP/preloaded pins). DNSSEC protects name resolution, and a VPN doesn't validate certificate authority — CT + CAA is the most deployable combination available to domain owners."
+  },
+  {
+    "d": 5,
+    "q": "A security analyst observes that a Windows endpoint running CrowdStrike is generating an alert: 'Credential Access — LSASS Access by Unsigned Process.' The alert shows 'explorer.exe' is the accessing process, but the process hash does not match the known-good hash for explorer.exe. What is the MOST likely attack?",
+    "o": [
+      "The EDR sensor is generating a false positive due to an OS update",
+      "Process masquerading: a malicious process named 'explorer.exe' in a non-standard path has been injected or launched to perform LSASS credential dumping while appearing as a trusted process",
+      "A legitimate Windows update is accessing LSASS for cryptographic operations",
+      "The user is running a custom shell replacement as explorer.exe"
+    ],
+    "a": 1,
+    "e": "An EDR alert showing a process named explorer.exe with a non-matching hash, accessing LSASS, is a strong indicator of process masquerading — a malicious binary using a legitimate process name in a different path (e.g., C:\\Temp\\explorer.exe) to evade name-based detections. The hash mismatch confirms it is not the legitimate system binary. LSASS access is typical credential dumping behavior. OS updates and legitimate Windows processes would match known-good hashes, and a custom shell would typically match a valid binary — hash mismatch + LSASS access = process masquerading for credential theft."
+  },
+  {
+    "d": 5,
+    "q": "A red team uses the 'Bring Your Own Vulnerable Driver' (BYOVD) technique to disable EDR protection on a target host. Which specific capability makes this technique effective?",
+    "o": [
+      "The technique exploits a vulnerability in the EDR vendor's cloud infrastructure",
+      "A legitimate, signed kernel driver containing a vulnerability is loaded into the Windows kernel; the red team exploits the driver's vulnerability to execute code in ring-0 (kernel mode), allowing them to disable kernel-level EDR components that run in the same privilege space",
+      "The technique relies on loading an unsigned driver using test-signing mode",
+      "The technique uses kernel patches via live kernel debugging to disable EDR"
+    ],
+    "a": 1,
+    "e": "BYOVD exploits the fact that Windows will load any signed, legitimate kernel driver — even if it contains vulnerabilities. By loading a known-vulnerable-but-signed driver, an attacker can exploit the driver's vulnerability to gain kernel-mode (ring-0) code execution. From kernel mode, they can terminate EDR processes, remove kernel hooks, or blind kernel-level telemetry. Microsoft's vulnerable driver blocklist aims to mitigate this. Exploiting the cloud, test-signing mode (blocked on secure-boot systems), and live kernel debugging are different approaches — using a signed vulnerable driver for kernel code execution is BYOVD's mechanism."
+  },
+  {
+    "d": 4,
+    "q": "An organization implements data tokenization for PCI DSS compliance. The payment application sends real PANs to a tokenization service and stores only tokens. A security auditor questions whether this reduces PCI DSS scope. Which statement MOST accurately reflects the PCI DSS scoping implications?",
+    "o": [
+      "Tokenization eliminates all PCI DSS requirements for the payment application",
+      "If implemented correctly (real PANs never touch the in-scope application's systems and the tokenization vault is properly segmented), the payment application's environment can potentially be de-scoped from PCI DSS, greatly reducing the compliance burden",
+      "Tokenization only reduces SAQ-A requirements, not SAQ-D",
+      "Tokenization must be approved by Visa and Mastercard individually to reduce scope"
+    ],
+    "a": 1,
+    "e": "PCI DSS scope is determined by cardholder data flow. If a properly implemented point-to-point encryption (P2PE) or tokenization solution ensures that raw PANs never enter the merchant's systems — the tokenization vault being the only PAN holder — the merchant's environment may be de-scoped or significantly reduced in scope. This is subject to PCI SSC guidance and QSA validation, and isn't automatic. Tokenization doesn't eliminate all requirements but can dramatically reduce them, SAQ applicability depends on the specific implementation, and card network individual approval is not the mechanism — proper implementation enabling de-scoping is the correct principle."
+  },
+  {
+    "d": 5,
+    "q": "An analyst investigating a phishing campaign finds that the malicious emails passed all SPF, DKIM, and DMARC checks with a p=reject policy. The emails appear to come from a legitimate subdomain the organization owns: 'updates.company.com'. What is the MOST likely explanation?",
+    "o": [
+      "DMARC p=reject policies do not apply to subdomains by default",
+      "An attacker gained control of a subdomain (updates.company.com) through subdomain takeover or DNS misconfiguration and used it as the sending domain, passing authentication because the subdomain is legitimately signed",
+      "SPF records cannot cover subdomains",
+      "DKIM signatures were forged using a weak key"
+    ],
+    "a": 1,
+    "e": "A subdomain takeover occurs when a subdomain's DNS record (e.g., CNAME) points to a service that has been deprovisioned — the attacker registers the same resource and controls the subdomain. From this position, they can send email from the subdomain with valid SPF (using the subdomain's own SPF record) and DKIM (signing with a key they publish for that subdomain). DMARC checks the From header domain alignment — the subdomain passes because it is legitimately configured. DMARC p=reject does apply to listed subdomains, SPF can cover subdomains, and DKIM keys would need to be compromised to forge signatures — subdomain takeover enabling legitimate-looking authentication is the most likely explanation."
+  },
+  {
+    "d": 5,
+    "q": "A threat actor uses a 'watering hole' attack against a specific industry sector. They compromise a legitimate industry association website and embed a zero-day browser exploit. Unlike generic web attacks, what makes a watering hole attack particularly effective and difficult to detect?",
+    "o": [
+      "The attacker uses custom malware that evades all antivirus products",
+      "The malicious site is legitimate and trusted by victims, the traffic blends with normal browsing patterns, and the attacker can precisely target a specific demographic (e.g., an industry sector) without directly attacking hardened enterprise systems",
+      "The attack does not require any malware, only credential phishing",
+      "Watering hole attacks work only against mobile devices"
+    ],
+    "a": 1,
+    "e": "Watering holes exploit trusted websites that specific targets visit — victims aren't suspicious because they're accessing familiar, legitimate resources. The attack traffic is indistinguishable from normal browsing, bypassing behavioral analysis. The attacker chooses a site visited by their specific target audience (e.g., defense sector forums) without needing to penetrate the actual target organization. The attack does use malware (exploits), can target any browser-capable device, and the exploit evasion is secondary to the trust and blending — targeting via trusted site compromise is what makes watering holes effective and stealthy."
+  },
+  {
+    "d": 5,
+    "q": "A developer receives a pull request from a new contributor to a popular open-source security library. The change is small, well-commented, and appears to fix a minor bug. A reviewer approves it. Three months later, researchers discover the change introduced a backdoor that triggers under a specific input pattern. This attack is called:",
+    "o": [
+      "Insider threat",
+      "Open-source supply chain attack (typosquatting variant)",
+      "A hypocrite commit / malicious code contribution (open-source supply chain attack via legitimate contribution channel)",
+      "Social engineering of the reviewer"
+    ],
+    "a": 2,
+    "e": "This describes a 'hypocrite commit' or malicious contribution attack — an adversary contributes legitimate-seeming changes to gain trust, or directly submits a subtly malicious change that evades review. This is a supply chain attack through the legitimate open-source contribution process, distinct from typosquatting (creating a package with a similar name) and from an insider threat (which implies existing organizational access). Social engineering describes manipulating people, which is a component but not the complete classification — contributing a subtly backdoored change to an open-source project through the legitimate PR process is a malicious contribution/supply chain attack."
+  },
+  {
+    "d": 5,
+    "q": "An organization's SOC receives a threat intelligence feed indicating an APT group is currently targeting their industry using a multi-stage attack: initial access via spear phishing, persistence via WMI subscriptions, lateral movement via PsExec with stolen credentials, and exfiltration via HTTPS to a legitimate cloud storage service. Which detection priority order BEST aligns with MITRE ATT&CK's concept of focusing detection on high-value choke points?",
+    "o": [
+      "Detect exfiltration first, then lateral movement, persistence, then initial access",
+      "Detect and alert on each technique independently with equal priority",
+      "Focus detection on persistence (WMI subscriptions) and lateral movement (PsExec) as chokepoints that are difficult to operationalize without and harder to live without than initial access vectors",
+      "Only detect initial access via email gateway, as blocking the intrusion early is always most valuable"
+    ],
+    "a": 2,
+    "e": "ATT&CK-aligned defense-in-depth prioritizes detecting and blocking techniques that are operationally necessary for the attacker and difficult to substitute — persistence and lateral movement are choke points the attacker cannot easily avoid. WMI subscription persistence and PsExec lateral movement leave distinctive forensic artifacts. Detecting exfiltration is too late; detecting only initial access assumes the email gateway is perfect (it isn't); equal priority across all techniques is not strategic. Focusing on persistence and lateral movement choke points provides the most durable detection coverage against this specific TTPs profile."
+  },
+  {
+    "d": 4,
+    "q": "An organization wants to measure the maturity of its security operations center. Which framework provides a maturity model specifically designed for SOC capabilities including detection, response, and threat intelligence?",
+    "o": [
+      "NIST Cybersecurity Framework (CSF)",
+      "SOC-CMM (Security Operations Center Capability Maturity Model)",
+      "ISO/IEC 27001",
+      "CIS Controls implementation groups"
+    ],
+    "a": 1,
+    "e": "The SOC-CMM is a maturity model specifically designed to assess and improve SOC capabilities across dimensions including business alignment, people, processes, technology, and services at defined maturity levels. NIST CSF is a broader risk management framework not SOC-specific, ISO 27001 is an ISMS standard, and CIS Controls implementation groups prioritize security controls broadly — a SOC-specific capability maturity model is SOC-CMM."
+  },
+  {
+    "d": 5,
+    "q": "A penetration tester discovers that a web application uses predictable session tokens generated by a linear congruential generator (LCG) seeded with the current Unix timestamp. After capturing two consecutive session tokens, the tester predicts the next valid session token. Which cryptographic principle does this violation demonstrate?",
+    "o": [
+      "Lack of session token entropy due to a cryptographically insecure pseudo-random number generator (CSPRNG)",
+      "Insufficient session token length",
+      "Missing HTTPS for session token transmission",
+      "Weak password hashing for session storage"
+    ],
+    "a": 0,
+    "e": "Session tokens must be generated using a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG). An LCG seeded with a timestamp is not cryptographically secure — its output is predictable once the seed or a few outputs are known. The fundamental flaw is using a non-CSPRNG for security-sensitive random number generation, making tokens guessable. Token length may also be insufficient but the root cause is the insecure RNG, not HTTPS or password hashing — using a non-cryptographic RNG for session token generation is the core violation."
+  },
+  {
+    "d": 5,
+    "q": "An organization is evaluating quantum key distribution (QKD) as a long-term protection for its most sensitive communications. Which statement MOST accurately represents a LIMITATION of QKD compared to post-quantum cryptography (PQC) algorithms?",
+    "o": [
+      "QKD does not provide confidentiality",
+      "QKD requires dedicated fiber or line-of-sight optical links and specialized hardware, limiting scalability and deployment flexibility compared to software-based PQC algorithms that run on standard hardware",
+      "QKD is based on unproven mathematical problems like PQC",
+      "QKD cannot be used with symmetric encryption"
+    ],
+    "a": 1,
+    "e": "QKD provides theoretically unbreakable key exchange using quantum mechanics, but requires dedicated quantum communication channels (specialized fiber or free-space optical links) and expensive hardware — it cannot be deployed over standard internet infrastructure or in software. PQC algorithms run on standard CPUs, can be deployed immediately on existing infrastructure, and are already being standardized by NIST. QKD does provide confidentiality via quantum key exchange, it is based on physics (not mathematical hardness), and it works with symmetric encryption — the infrastructure and scalability limitation is QKD's primary practical drawback versus PQC."
+  },
+  {
+    "d": 5,
+    "q": "During incident response, an analyst discovers a web shell at '/var/www/html/images/logo.php' on a Linux server. The file contains PHP code that accepts base64-encoded commands via a POST parameter. The analyst needs to determine how the web shell was planted. Which log source is MOST likely to contain direct evidence of the initial file upload?",
+    "o": [
+      "The system authentication log (/var/log/auth.log)",
+      "The web server access log (e.g., /var/log/apache2/access.log) showing the HTTP POST request that uploaded the file to a vulnerable upload endpoint",
+      "The Linux kernel audit log showing system calls",
+      "The network firewall log showing inbound connections"
+    ],
+    "a": 1,
+    "e": "A web shell planted via a file upload vulnerability would appear in the web server's access log as a POST request to the vulnerable upload endpoint with a file attachment. The access log records the HTTP method, URI, client IP, and response code — the upload event should be visible. Auth logs record SSH/sudo authentication not HTTP uploads, kernel audit logs require specific syscall auditing configuration and produce enormous logs, and firewall logs show connection metadata not HTTP content — the web server access log most directly captures the HTTP upload event."
+  },
+  {
+    "d": 4,
+    "q": "A security engineer is designing a system where microservices must authenticate each other without human involvement. Which mechanism is MOST suitable for automated service-to-service authentication in a cloud-native environment?",
+    "o": [
+      "Username and password stored in environment variables",
+      "Mutual TLS (mTLS) using certificates issued by an internal CA with short lifetimes and automated rotation via a certificate manager (e.g., SPIFFE/SPIRE)",
+      "Shared API key stored in a configuration file",
+      "SAML 2.0 assertions"
+    ],
+    "a": 1,
+    "e": "SPIFFE (Secure Production Identity Framework For Everyone) and SPIRE provide a standard for issuing short-lived, automatically rotated X.509 certificates (SVIDs) to workloads, enabling mTLS for service-to-service authentication without human-managed credentials. Credentials in environment variables are exposed to memory and metadata, shared API keys don't scale or provide per-service identity, and SAML is designed for human user authentication flows — mTLS with SPIFFE/SPIRE provides automated, short-lived, workload-specific identity."
+  },
+  {
+    "d": 5,
+    "q": "A CISO learns that the organization's managed security service provider (MSSP) suffered a breach, and the MSSP had access to the organization's SIEM, endpoint management console, and firewall management portal. Which risk concept does this MOST directly illustrate and what is the MOST critical immediate action?",
+    "o": [
+      "Insider threat from MSSP employees; immediately terminate the contract",
+      "Nth-party supply chain risk; immediately rotate or revoke all credentials, API keys, and certificates used by the MSSP and audit for unauthorized changes during the MSSP's breach window",
+      "Regulatory compliance failure; notify the breach to regulators immediately",
+      "Shadow IT risk; document the MSSP relationship formally"
+    ],
+    "a": 1,
+    "e": "A breach of a provider with privileged access to an organization's critical security infrastructure is a supply chain/Nth-party risk materialization. The most critical immediate action is revoking all credentials and access used by the MSSP (since they may have been stolen), rotating secrets, and auditing for unauthorized changes or backdoors introduced during the breach window — the attacker may have used the MSSP's access to compromise the organization. Terminating the contract doesn't revoke existing credentials, regulatory notification may be required but isn't the most critical immediate operational action, and this isn't shadow IT — credential revocation and access audit are the most critical immediate steps."
   }
 ]
