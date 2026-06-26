@@ -6579,5 +6579,1205 @@
     "o": ["Risk owner and treatment status", "Switch configurations", "Employee salaries", "Database schemas"],
     "a": 0,
     "e": "Risk registers track ownership, impact, likelihood, and remediation."
+  },
+  {
+    "d": 1,
+    "q": "Which type of security control is specifically designed to restore systems and operations to normal after a security incident has occurred?",
+    "o": [
+      "Preventive",
+      "Detective",
+      "Deterrent",
+      "Corrective"
+    ],
+    "a": 3,
+    "e": "A corrective control acts after an incident to restore normal operations, such as restoring from backup or patching a vulnerability. A preventive control stops incidents from happening in the first place, a detective control identifies incidents after they occur, and a deterrent control discourages would-be attackers before an incident — none of these are focused on restoration."
+  },
+  {
+    "d": 1,
+    "q": "An organization places a security guard at its data center entrance to verify employee badges before allowing entry. This is an example of which control category?",
+    "o": [
+      "Technical",
+      "Managerial",
+      "Operational",
+      "Physical"
+    ],
+    "a": 2,
+    "e": "Operational controls are those carried out by people following defined procedures, such as a guard performing badge checks. Technical controls use technology such as firewalls and encryption, managerial controls are policy-based, and physical controls use tangible barriers like locks and fences — a human process of verification is operational."
+  },
+  {
+    "d": 1,
+    "q": "Which component of the CIA triad is directly threatened when a ransomware attack encrypts a company's files and makes them inaccessible?",
+    "o": [
+      "Confidentiality",
+      "Integrity",
+      "Availability",
+      "Non-repudiation"
+    ],
+    "a": 2,
+    "e": "Ransomware prevents legitimate users from accessing their data, directly targeting availability. Confidentiality concerns unauthorized disclosure of data, integrity concerns unauthorized modification, and non-repudiation concerns proof of origin — none of these describe denial of access to one's own data."
+  },
+  {
+    "d": 2,
+    "q": "A company uses a badge access system where a unique chip in the badge must be physically present to unlock a door. Which authentication factor does this represent?",
+    "o": [
+      "Something you know",
+      "Something you are",
+      "Something you have",
+      "Somewhere you are"
+    ],
+    "a": 2,
+    "e": "A physical badge or token that must be present is a possession-based factor, classified as something you have. Something you know refers to passwords or PINs, something you are refers to biometrics, and somewhere you are refers to location-based factors — a physical chip-based badge is clearly a possession factor."
+  },
+  {
+    "d": 2,
+    "q": "A user scans their fingerprint to unlock their workstation. The fingerprint scanner then confirms the scanned print matches a stored template. Which authentication factor is being used?",
+    "o": [
+      "Something you know",
+      "Something you have",
+      "Something you are",
+      "Somewhere you are"
+    ],
+    "a": 2,
+    "e": "A fingerprint is a biometric measurement unique to the individual's physical body, making it a 'something you are' factor. A password or PIN is something you know, a token or badge is something you have, and a geolocation check is somewhere you are — biometrics are biological characteristics."
+  },
+  {
+    "d": 2,
+    "q": "Which of the following BEST describes a compensating control?",
+    "o": [
+      "A control that prevents a specific attack",
+      "A control that detects an attack after it occurs",
+      "A control used when the primary control cannot be implemented",
+      "A control that corrects damage after an incident"
+    ],
+    "a": 2,
+    "e": "A compensating control is an alternative control used when the primary or preferred control is not feasible to implement. A preventive control blocks attacks, a detective control identifies incidents after the fact, and a corrective control restores systems — none substitute for an unavailable primary control the way a compensating control does."
+  },
+  {
+    "d": 1,
+    "q": "The practice of confirming that a user is who they claim to be is known as:",
+    "o": [
+      "Authorization",
+      "Accounting",
+      "Authentication",
+      "Auditing"
+    ],
+    "a": 2,
+    "e": "Authentication is the process of verifying claimed identity, typically via credentials. Authorization determines what an authenticated user is permitted to do, accounting logs what actions were taken, and auditing reviews logs and controls for compliance — verification of identity is specifically authentication."
+  },
+  {
+    "d": 2,
+    "q": "An organization discovers that an administrator has been slowly transferring sensitive files to an external drive over several months without detection. Which detection control would have been MOST useful?",
+    "o": [
+      "Deterrent signage",
+      "File Integrity Monitoring",
+      "Data Loss Prevention",
+      "Network Access Control"
+    ],
+    "a": 2,
+    "e": "Data Loss Prevention (DLP) specifically monitors for and blocks unauthorized transfer of sensitive data to external destinations, including removable media. Deterrent signage discourages but does not detect, FIM monitors file modification rather than exfiltration, and NAC controls device network admission — DLP most directly addresses outbound data movement."
+  },
+  {
+    "d": 3,
+    "q": "Which principle requires that no single individual should have complete control over a critical transaction or process?",
+    "o": [
+      "Least privilege",
+      "Need to know",
+      "Separation of duties",
+      "Job rotation"
+    ],
+    "a": 2,
+    "e": "Separation of duties splits a critical task across multiple people so no single individual can complete it alone, reducing fraud risk. Least privilege limits access to only what is needed for one's role, need to know restricts information access by relevance, and job rotation cycles people through roles — only separation of duties specifically prevents one person from controlling an entire process."
+  },
+  {
+    "d": 2,
+    "q": "A systems administrator is given the minimum set of permissions necessary to manage the servers assigned to them and no more. Which security principle governs this decision?",
+    "o": [
+      "Separation of duties",
+      "Least privilege",
+      "Two-person integrity",
+      "Job rotation"
+    ],
+    "a": 1,
+    "e": "Least privilege ensures each user has only the permissions required for their specific job responsibilities. Separation of duties splits a task among multiple people, two-person integrity requires two people for sensitive operations, and job rotation cycles employees between roles — limiting permissions to what is necessary is specifically least privilege."
+  },
+  {
+    "d": 2,
+    "q": "An attacker sends a fraudulent email that appears to come from the CEO, instructing an employee in accounting to wire funds urgently. The email specifically references the employee's manager by name. This is best classified as:",
+    "o": [
+      "Generic phishing",
+      "Vishing",
+      "Smishing",
+      "Spear phishing"
+    ],
+    "a": 3,
+    "e": "Spear phishing is a targeted phishing attack tailored to a specific individual or organization, often incorporating personal details to appear credible. Generic phishing is sent to many recipients without personalization, vishing uses voice calls, and smishing uses SMS — a targeted email using specific personal details is specifically spear phishing."
+  },
+  {
+    "d": 2,
+    "q": "An attacker monitors a conversation between two users and selectively modifies messages in transit before they reach the recipient, without either party knowing. Which attack type does this describe?",
+    "o": [
+      "Replay attack",
+      "Eavesdropping",
+      "On-path attack",
+      "Session hijacking"
+    ],
+    "a": 2,
+    "e": "An on-path (formerly man-in-the-middle) attack involves positioning between two parties and actively intercepting and modifying traffic. A replay attack resends previously captured data without necessarily modifying it, eavesdropping is passive listening without modification, and session hijacking takes over an already established session — active interception and modification defines an on-path attack."
+  },
+  {
+    "d": 2,
+    "q": "A threat actor gains initial access to a system using valid credentials and then uses built-in Windows tools to move through the network. Security tools fail to detect this because no custom malware is used. This technique is called:",
+    "o": [
+      "Rootkit deployment",
+      "Fileless malware only",
+      "Living-off-the-land",
+      "Process injection"
+    ],
+    "a": 2,
+    "e": "Living-off-the-land (LOTL) refers to attackers using legitimate, trusted system tools already present on the target rather than deploying custom malware, making detection difficult. A rootkit specifically hides malicious presence in the OS, fileless malware is a related concept but broader, and process injection refers specifically to injecting code into running processes."
+  },
+  {
+    "d": 2,
+    "q": "Malware is discovered that connects to an external server every 30 minutes, awaiting commands from the attacker. This network of compromised systems awaiting instruction is known as a:",
+    "o": [
+      "Rootkit",
+      "Trojan",
+      "Worm",
+      "Botnet"
+    ],
+    "a": 3,
+    "e": "A botnet is a collection of compromised systems under attacker control, typically communicating with a command-and-control server. A rootkit hides malicious presence, a Trojan disguises itself as legitimate software, and a worm self-replicates across networks — systems awaiting commands from an attacker through a C2 channel form a botnet."
+  },
+  {
+    "d": 2,
+    "q": "An employee receives a text message appearing to be from their company's IT helpdesk, requesting they click a link to reset their VPN password. This type of social engineering attack is called:",
+    "o": [
+      "Phishing",
+      "Vishing",
+      "Spear phishing",
+      "Smishing"
+    ],
+    "a": 3,
+    "e": "Smishing is phishing conducted via SMS text messages. Phishing typically refers to email-based attacks, vishing uses voice calls, and spear phishing is a personalized email-based attack — an attack delivered via text message is specifically smishing."
+  },
+  {
+    "d": 3,
+    "q": "A threat actor encrypts communications and data using the target organization's own public keys before exfiltrating them, making decryption by the target impossible without external assistance. What attack technique is MOST likely being used?",
+    "o": [
+      "Ransomware",
+      "Double extortion",
+      "Cryptojacking",
+      "Symmetric hijacking"
+    ],
+    "a": 1,
+    "e": "Double extortion combines traditional ransomware encryption with the threat of publishing exfiltrated data publicly, giving attackers two leverage points. Standard ransomware only encrypts locally, cryptojacking uses victim resources to mine cryptocurrency rather than encrypting data, and 'symmetric hijacking' is not a recognized attack term."
+  },
+  {
+    "d": 2,
+    "q": "An attacker uses an automated tool to send millions of requests per second to a web server from a single source IP, rendering the service unavailable. This is a:",
+    "o": [
+      "Distributed Denial of Service (DDoS)",
+      "Denial of Service (DoS)",
+      "Amplification attack",
+      "Botnet attack"
+    ],
+    "a": 1,
+    "e": "A denial of service (DoS) attack originates from a single source. A DDoS originates from many distributed sources simultaneously, an amplification attack generates oversized responses to small requests, and a botnet attack uses many compromised hosts — a single-source flood is specifically a DoS."
+  },
+  {
+    "d": 3,
+    "q": "A penetration tester discovers that the web application reflects unsanitized query parameters directly in HTTP response headers. Which vulnerability should the tester document?",
+    "o": [
+      "SQL injection",
+      "Header injection",
+      "SSRF",
+      "Clickjacking"
+    ],
+    "a": 1,
+    "e": "Header injection occurs when unsanitized user input is included in HTTP response headers, potentially enabling attacks like HTTP response splitting or cookie injection. SQL injection targets databases, SSRF abuses server-side URL fetching, and clickjacking tricks users into clicking hidden elements — unsanitized parameters reflected in response headers is specifically header injection."
+  },
+  {
+    "d": 2,
+    "q": "An attacker sets up a free Wi-Fi hotspot in a coffee shop named 'CoffeeShop_Free' that mimics the legitimate 'CoffeeShop' network, capturing user credentials. This is an example of a:",
+    "o": [
+      "Deauthentication attack",
+      "Rogue access point",
+      "Evil twin attack",
+      "Jamming attack"
+    ],
+    "a": 2,
+    "e": "An evil twin attack specifically impersonates a legitimate network by broadcasting the same or a very similar SSID to deceive users into connecting. A deauthentication attack forces clients to disconnect, a rogue AP is an unauthorized access point but may not mimic an existing network, and a jamming attack uses RF interference — an impersonation of a known network is specifically an evil twin."
+  },
+  {
+    "d": 2,
+    "q": "A security analyst detects malware that does not write any executable files to disk and exists entirely in system memory, executing through PowerShell and WMI. This is best described as:",
+    "o": [
+      "Rootkit",
+      "Fileless malware",
+      "Logic bomb",
+      "Spyware"
+    ],
+    "a": 1,
+    "e": "Fileless malware operates entirely in memory and uses legitimate system tools, leaving no traditional file-based artifacts for antivirus to detect. A rootkit modifies the OS to hide itself, a logic bomb triggers on a specific condition, and spyware covertly collects information — operating only in memory with no disk-based files defines fileless malware."
+  },
+  {
+    "d": 2,
+    "q": "An organization routes all user internet traffic through a cloud-based security platform that inspects content, enforces policy, and blocks threats regardless of the user's physical location. Which architecture does this represent?",
+    "o": [
+      "Traditional perimeter firewall",
+      "IPsec VPN gateway",
+      "Secure Access Service Edge (SASE)",
+      "Unified Threat Management (UTM)"
+    ],
+    "a": 2,
+    "e": "SASE converges wide-area networking and security services into a single cloud-delivered platform that applies security regardless of user location. A traditional perimeter firewall only protects traffic entering/leaving the physical network, IPsec VPN provides encrypted connectivity but not broad cloud security, and UTM is an on-premises appliance — cloud-delivered security regardless of location is SASE."
+  },
+  {
+    "d": 2,
+    "q": "In a zero trust architecture, the component that evaluates context such as user identity, device health, and location before deciding to allow or deny access is called the:",
+    "o": [
+      "Policy Enforcement Point",
+      "Policy Administrator",
+      "Policy Engine",
+      "Trust Broker"
+    ],
+    "a": 2,
+    "e": "The Policy Engine (PE) makes the access decision by evaluating identity, device health, and other contextual signals. The Policy Administrator implements the PE's decision by configuring access, the Policy Enforcement Point physically allows or blocks the session, and 'Trust Broker' is not a standard zero trust component — evaluating context and deciding access is the PE's role."
+  },
+  {
+    "d": 2,
+    "q": "An organization configures its firewall to drop all traffic by default and only permit explicitly defined, necessary communication. This approach is known as:",
+    "o": [
+      "Fail-open policy",
+      "Implicit permit",
+      "Default deny",
+      "Stateless filtering"
+    ],
+    "a": 2,
+    "e": "Default deny (or implicit deny) blocks all traffic not explicitly permitted by a rule, minimizing attack surface. Fail-open allows traffic through during a failure, implicit permit allows all traffic not explicitly blocked (the opposite), and stateless filtering describes a filtering technique rather than a policy stance — dropping everything not explicitly allowed is default deny."
+  },
+  {
+    "d": 2,
+    "q": "A company deploys an appliance in front of its mail server that scans all inbound emails for spam, malware, and phishing links, blocking malicious messages before they reach users' inboxes. This appliance is called a:",
+    "o": [
+      "Web Application Firewall",
+      "Secure Email Gateway",
+      "Data Loss Prevention system",
+      "Network Access Controller"
+    ],
+    "a": 1,
+    "e": "A Secure Email Gateway inspects inbound (and often outbound) email for threats including spam, malware, and phishing. A WAF protects web applications from HTTP-based attacks, a DLP system prevents sensitive data from leaving the organization, and NAC controls device network admission — email-specific inspection and filtering is the Secure Email Gateway's role."
+  },
+  {
+    "d": 3,
+    "q": "A security architect recommends using microsegmentation in a data center environment. What is the PRIMARY security benefit of microsegmentation?",
+    "o": [
+      "Encrypting inter-server traffic",
+      "Reducing the number of physical servers needed",
+      "Preventing east-west lateral movement between workloads",
+      "Providing endpoint detection on each VM"
+    ],
+    "a": 2,
+    "e": "Microsegmentation divides the data center into very small, isolated zones with per-workload access controls, preventing attackers from moving laterally between systems after an initial compromise. It does not inherently encrypt traffic, reduce server count, or provide EDR capabilities — limiting east-west lateral movement is its primary security benefit."
+  },
+  {
+    "d": 2,
+    "q": "An organization wants to ensure that data stored on laptops cannot be read if a device is lost or stolen. Which control is MOST directly effective?",
+    "o": [
+      "Strong password policy",
+      "Full disk encryption",
+      "Remote wipe",
+      "VPN requirement"
+    ],
+    "a": 1,
+    "e": "Full disk encryption protects all data on the device by making it unreadable without the decryption key, regardless of physical access. A strong password policy can be bypassed by booting from external media, remote wipe requires connectivity that may not exist, and a VPN requirement protects data in transit, not at rest — FDE directly protects stored data even without connectivity."
+  },
+  {
+    "d": 2,
+    "q": "A company implements a system where employees must use the company-issued device, follow all MDM policies, but the company pays for and owns the device. This deployment model is known as:",
+    "o": [
+      "BYOD",
+      "CYOD",
+      "BYOA",
+      "COPE"
+    ],
+    "a": 3,
+    "e": "COPE (Corporate-Owned, Personally Enabled) means the company owns and configures the device but allows personal use. BYOD means the employee owns the device, CYOD lets the employee choose from approved devices that the company then owns, and BYOA refers to employees using personal applications — company ownership with personal use enabled is COPE."
+  },
+  {
+    "d": 3,
+    "q": "An organization needs to ensure that two geographically separated data centers can each handle 100% of production workloads independently. If one fails, the other continues without any manual intervention. Which architecture is required?",
+    "o": [
+      "Active-passive with manual failover",
+      "Warm site replication",
+      "Active-active architecture",
+      "Cold site standby"
+    ],
+    "a": 2,
+    "e": "Active-active architecture has both sites simultaneously processing live traffic, so either site can absorb the full load instantly if the other fails. Active-passive keeps one site idle until failover is triggered (which may require intervention), a warm site needs restoration time, and a cold site requires extensive setup — simultaneous, fully capable operation at both sites defines active-active."
+  },
+  {
+    "d": 2,
+    "q": "Which cloud deployment model is defined by infrastructure exclusively owned, operated, and used by a single organization?",
+    "o": [
+      "Public cloud",
+      "Hybrid cloud",
+      "Community cloud",
+      "Private cloud"
+    ],
+    "a": 3,
+    "e": "A private cloud is used exclusively by one organization, whether on-premises or hosted by a provider. A public cloud shares infrastructure among multiple tenants, a hybrid cloud combines public and private, and a community cloud is shared among organizations with common interests — exclusive single-organization use defines private cloud."
+  },
+  {
+    "d": 2,
+    "q": "A security policy requires that all data marked 'Confidential' be encrypted at rest. A system administrator applies AES-256 encryption to a file server volume. Which data state is being protected?",
+    "o": [
+      "Data in transit",
+      "Data in use",
+      "Data in process",
+      "Data at rest"
+    ],
+    "a": 3,
+    "e": "Data at rest refers to data stored persistently on media such as file server volumes, drives, or databases. Data in transit is data moving across a network, data in use and data in process refer to data actively being processed in memory — encryption of a stored file server volume protects data at rest."
+  },
+  {
+    "d": 2,
+    "q": "A security analyst uses a tool to systematically probe a corporate network for open ports, running services, OS versions, and vulnerabilities using a database of known signatures. This activity is called:",
+    "o": [
+      "Penetration testing",
+      "Threat hunting",
+      "Vulnerability scanning",
+      "Network enumeration only"
+    ],
+    "a": 2,
+    "e": "Vulnerability scanning uses automated tools to probe systems for known flaws against a signature database. Penetration testing actively exploits vulnerabilities and goes further than scanning, threat hunting proactively searches for undetected compromise, and basic network enumeration identifies hosts and ports without checking for specific vulnerabilities — automated signature-based flaw checking is vulnerability scanning."
+  },
+  {
+    "d": 2,
+    "q": "After a confirmed data breach, the incident response team works to identify all affected systems, remove the attacker's presence, and close the vulnerabilities used. This activity falls within which phase?",
+    "o": [
+      "Preparation",
+      "Containment",
+      "Recovery",
+      "Eradication"
+    ],
+    "a": 3,
+    "e": "Eradication involves removing malware, closing vulnerabilities, and eliminating the attacker's foothold from all affected systems. Preparation happens before incidents, containment limits the spread of an active incident, and recovery restores normal operations after the threat is removed — removing the attacker's presence is specifically eradication."
+  },
+  {
+    "d": 2,
+    "q": "A forensic analyst creates a bit-for-bit duplicate of a hard drive before analysis, verifying the copy's hash matches the original. Why is this important?",
+    "o": [
+      "To reduce analysis time",
+      "To preserve the original evidence and ensure analysis does not alter it",
+      "To compress the data for storage",
+      "To enable remote analysis"
+    ],
+    "a": 1,
+    "e": "Working from a verified copy preserves the original evidence untouched and proves the copy is identical, protecting the chain of custody and admissibility. Bit-for-bit imaging with hash verification is not primarily about speed, compression, or remote access — it specifically ensures original evidence integrity."
+  },
+  {
+    "d": 2,
+    "q": "A security team wants to proactively search its environment for signs of compromise that have not triggered any automated alerts. What activity are they performing?",
+    "o": [
+      "Incident response",
+      "Vulnerability scanning",
+      "Penetration testing",
+      "Threat hunting"
+    ],
+    "a": 3,
+    "e": "Threat hunting is the proactive, human-led search for indicators of compromise or attacker activity that hasn't been detected by automated tools. Incident response reacts to confirmed alerts, vulnerability scanning checks for known flaws, and penetration testing actively exploits systems — searching proactively before alerts fire is threat hunting."
+  },
+  {
+    "d": 2,
+    "q": "Which phase of the incident response lifecycle involves reviewing lessons learned, updating playbooks, and conducting post-incident training?",
+    "o": [
+      "Containment",
+      "Recovery",
+      "Preparation",
+      "Post-incident activity"
+    ],
+    "a": 3,
+    "e": "Post-incident activity (sometimes called lessons learned) is the phase after recovery where teams document findings, update procedures, and improve future response capabilities. Containment limits an active incident, recovery restores operations, and preparation happens before incidents — reviewing and improving based on the incident is post-incident activity."
+  },
+  {
+    "d": 2,
+    "q": "An organization automatically aggregates, normalizes, and stores logs from all cloud services, endpoints, and network devices in a tamper-resistant repository. What is this practice PRIMARILY designed to ensure?",
+    "o": [
+      "Faster alert response",
+      "Log compression",
+      "Audit trail integrity",
+      "Threat intelligence enrichment"
+    ],
+    "a": 2,
+    "e": "Centralizing logs in a tamper-resistant repository ensures that log data is preserved accurately for audit, forensic, and compliance purposes. While faster response and enrichment are secondary benefits, the primary design goal of tamper-resistant centralized logging is audit trail integrity — ensuring logs cannot be altered or deleted by an attacker who compromises a source system."
+  },
+  {
+    "d": 2,
+    "q": "A newly discovered vulnerability in a widely used library has no available patch, and exploits are circulating publicly. Which vulnerability type does this represent?",
+    "o": [
+      "Legacy vulnerability",
+      "Misconfiguration",
+      "Zero-day vulnerability",
+      "Known vulnerability"
+    ],
+    "a": 2,
+    "e": "A zero-day vulnerability is one for which no patch exists at the time it is being exploited, often because the vendor was unaware or the patch is not yet available. A legacy vulnerability exists in unsupported software but is typically known and documented, a misconfiguration is a setup error, and a known vulnerability has been disclosed and typically has a fix available."
+  },
+  {
+    "d": 3,
+    "q": "An analyst observes that a process on a workstation is making outbound HTTPS connections at perfectly regular 60-second intervals to an external server with a newly registered domain. This behavior is MOST consistent with:",
+    "o": [
+      "Normal update traffic",
+      "Command-and-control (C2) beaconing",
+      "DNS amplification",
+      "ARP poisoning"
+    ],
+    "a": 1,
+    "e": "C2 beaconing involves malware checking in with an attacker-controlled server at regular intervals for instructions. Normal update traffic is typically irregular and to known vendor domains, DNS amplification is a DDoS reflection technique, and ARP poisoning is a local network attack — regular interval connections to an unknown new domain strongly indicate C2 beaconing."
+  },
+  {
+    "d": 2,
+    "q": "Which scanning technique causes the LEAST disruption to target systems because it never completes a full TCP three-way handshake?",
+    "o": [
+      "Full connect scan",
+      "SYN scan (half-open scan)",
+      "UDP scan",
+      "XMAS scan"
+    ],
+    "a": 1,
+    "e": "A SYN scan (half-open scan) sends only SYN packets and does not complete the handshake, reducing the load on the target and making detection harder. A full connect scan completes the handshake, a UDP scan probes UDP ports and can be intrusive, and an XMAS scan sets unusual TCP flags — the half-open technique is the least disruptive."
+  },
+  {
+    "d": 3,
+    "q": "A penetration tester gains access to a web server and then uses it as a launch point to attack internal database servers that are not directly reachable from the internet. This technique is called:",
+    "o": [
+      "Privilege escalation",
+      "Lateral movement",
+      "Pivoting",
+      "Pass-the-hash"
+    ],
+    "a": 2,
+    "e": "Pivoting uses a compromised system as a relay to reach and attack otherwise inaccessible network segments or systems. Privilege escalation gains higher permissions on an already accessed system, lateral movement describes moving between systems at the same privilege level broadly, and pass-the-hash reuses a credential hash — using a compromised system to route attacks through it is specifically pivoting."
+  },
+  {
+    "d": 2,
+    "q": "A regulation requires that financial services firms encrypt customer data and report breaches within 72 hours. Failure to comply results in substantial fines. This scenario describes which type of risk consequence?",
+    "o": [
+      "Reputational risk only",
+      "Strategic risk",
+      "Regulatory / compliance risk",
+      "Operational risk"
+    ],
+    "a": 2,
+    "e": "Regulatory/compliance risk arises from failing to meet legal or regulatory requirements and can result in fines, sanctions, or loss of operating licenses. Reputational risk involves public perception, strategic risk involves high-level direction decisions, and operational risk involves day-to-day process failures — mandatory rules with fines for violations define regulatory/compliance risk."
+  },
+  {
+    "d": 2,
+    "q": "A company decides to stop offering a particular service because the security risks associated with it cannot be reduced to an acceptable level. This risk response is called:",
+    "o": [
+      "Risk acceptance",
+      "Risk mitigation",
+      "Risk transfer",
+      "Risk avoidance"
+    ],
+    "a": 3,
+    "e": "Risk avoidance involves eliminating the activity that creates the risk entirely. Risk acceptance means proceeding while tolerating the risk, risk mitigation reduces the risk through controls while still proceeding, and risk transfer shifts the financial impact to another party — stopping the service to eliminate the risk is avoidance."
+  },
+  {
+    "d": 2,
+    "q": "Which document formally establishes the overall goals, scope, and accountability for an organization's information security program?",
+    "o": [
+      "Security procedure",
+      "Security standard",
+      "Security guideline",
+      "Information security policy"
+    ],
+    "a": 3,
+    "e": "An information security policy is the high-level, executive-sponsored document that establishes the organization's security objectives, accountability, and scope. A procedure provides step-by-step instructions, a standard defines specific mandatory technical requirements, and a guideline provides recommended (but non-mandatory) guidance — the overarching authoritative document is the information security policy."
+  },
+  {
+    "d": 2,
+    "q": "An organization's security policy requires all third-party vendors with access to customer data to undergo annual security assessments and provide results. This is part of which program?",
+    "o": [
+      "Vulnerability management",
+      "Change management",
+      "Third-party risk management",
+      "Data classification"
+    ],
+    "a": 2,
+    "e": "Third-party risk management governs the security requirements, assessments, and oversight of external vendors who may have access to organizational data or systems. Vulnerability management focuses on internal technical flaws, change management governs internal system changes, and data classification assigns sensitivity levels — vendor security assessment requirements are part of third-party risk management."
+  },
+  {
+    "d": 2,
+    "q": "Under GDPR, an organization that processes personal data on behalf of another organization under a data processing agreement is called a:",
+    "o": [
+      "Data subject",
+      "Data controller",
+      "Data owner",
+      "Data processor"
+    ],
+    "a": 3,
+    "e": "A data processor handles personal data on behalf of and under instructions from the data controller. A data subject is the individual whose data is being processed, a data controller determines the purposes and means of processing, and a data owner is an organizational role rather than a GDPR legal term — processing on behalf of another under contract is the data processor's role."
+  },
+  {
+    "d": 3,
+    "q": "A company learns that a subcontractor of its primary IT vendor suffered a breach that exposed the company's customer data. Which risk concept does this BEST illustrate?",
+    "o": [
+      "Insider threat",
+      "Nation-state risk",
+      "Nth-party risk",
+      "Shadow IT risk"
+    ],
+    "a": 2,
+    "e": "Nth-party risk refers to exposure arising not from a direct vendor but from the vendor's vendors (subcontractors or suppliers further down the supply chain). An insider threat originates from someone with legitimate internal access, nation-state risk involves government-backed attackers, and shadow IT involves unauthorized internal tool use — exposure through a vendor's vendor is Nth-party/supply chain risk."
+  },
+  {
+    "d": 2,
+    "q": "Which governance framework specifically focuses on IT management best practices and aligns IT goals with business objectives?",
+    "o": [
+      "NIST CSF",
+      "ISO 27001",
+      "COBIT",
+      "PCI DSS"
+    ],
+    "a": 2,
+    "e": "COBIT (Control Objectives for Information and Related Technologies) is a governance and management framework specifically focused on aligning IT with business objectives. NIST CSF is a cybersecurity risk management framework, ISO 27001 is an information security management standard, and PCI DSS is a payment card data security standard — IT-to-business alignment is COBIT's primary focus."
+  },
+  {
+    "d": 2,
+    "q": "A company undergoes a SOC 2 Type II audit. Which statement BEST describes what this audit assesses?",
+    "o": [
+      "A one-time check of security control design",
+      "The effectiveness of security controls over a sustained period",
+      "Network penetration test results",
+      "Financial statement accuracy"
+    ],
+    "a": 1,
+    "e": "SOC 2 Type II assesses whether security controls not only exist (design) but operate effectively over a period of time, typically 6–12 months. SOC 2 Type I checks design only at a point in time, penetration test results are a separate activity, and SOC 1/financial controls are different — testing operating effectiveness over time is specifically what makes SOC 2 Type II distinct."
+  },
+  {
+    "d": 2,
+    "q": "An organization is required to provide affected individuals with notice within 72 hours of discovering a personal data breach. This requirement is most associated with:",
+    "o": [
+      "HIPAA",
+      "PCI DSS",
+      "SOX",
+      "GDPR"
+    ],
+    "a": 3,
+    "e": "GDPR mandates that data controllers notify the relevant supervisory authority of a personal data breach within 72 hours of becoming aware of it. HIPAA requires breach notification but within 60 days for most scenarios, PCI DSS governs payment card data, and SOX concerns financial reporting controls — the specific 72-hour authority notification requirement comes from GDPR."
+  },
+  {
+    "d": 2,
+    "q": "A security policy requires that employees complete annual security awareness training. An employee fails to complete the training by the deadline and their account is temporarily disabled. This enforcement mechanism is an example of:",
+    "o": [
+      "Compensating control",
+      "Preventive technical control",
+      "Administrative control enforcement",
+      "Detective control"
+    ],
+    "a": 2,
+    "e": "Enforcing a policy requirement (mandatory training) through an administrative consequence (account disablement) is an administrative control enforcement mechanism. A compensating control substitutes for an unavailable primary control, a preventive technical control is a technology-based barrier, and a detective control identifies incidents after the fact — policy-based enforcement through administrative consequences is administrative control."
+  },
+  {
+    "d": 3,
+    "q": "A public key infrastructure uses an OCSP stapling mechanism. What does OCSP stapling improve compared to traditional OCSP?",
+    "o": [
+      "Key generation speed",
+      "Certificate signing throughput",
+      "Privacy and performance by having the server pre-cache the OCSP response",
+      "Revocation list size"
+    ],
+    "a": 2,
+    "e": "OCSP stapling has the web server periodically obtain and cache the OCSP response from the CA and deliver it to clients during the TLS handshake, reducing privacy exposure (clients no longer contact the CA directly) and improving performance. It doesn't affect key generation, signing throughput, or revocation list size — the privacy and performance improvement from pre-caching is OCSP stapling's benefit."
+  },
+  {
+    "d": 3,
+    "q": "An attacker sends a specially crafted email that causes the victim's email client to make an external HTTP request to an attacker-controlled server, disclosing the victim's IP address. Which embedded tracking element is MOST likely being used?",
+    "o": [
+      "SQL payload",
+      "JavaScript injection",
+      "Tracking pixel",
+      "Steganographic image"
+    ],
+    "a": 2,
+    "e": "A tracking pixel is a tiny, often 1x1 image embedded in an email that, when loaded, makes an HTTP GET request to an attacker's server, revealing the recipient's IP address and confirming email delivery. SQL payloads target databases, JavaScript is typically blocked in email clients, and steganographic images hide data rather than trigger network requests — a network-fetching invisible image is a tracking pixel."
+  },
+  {
+    "d": 3,
+    "q": "An organization implements a honeypot that specifically mimics a database server containing fake customer records. The primary purpose of this honeypot is to:",
+    "o": [
+      "Store real backup data",
+      "Detect and study attackers who access it",
+      "Provide redundancy for the production database",
+      "Test application performance"
+    ],
+    "a": 1,
+    "e": "A honeypot mimics a real system to lure attackers, and any interaction with it is by definition unauthorized and suspicious, allowing defenders to detect and study attacker behavior. It stores fake, not real, data, does not provide production redundancy, and is not a performance testing tool — detecting and studying unauthorized access is its purpose."
+  },
+  {
+    "d": 2,
+    "q": "Which DNS record type is used to map an IPv6 address to a hostname?",
+    "o": [
+      "A record",
+      "PTR record",
+      "AAAA record",
+      "CNAME record"
+    ],
+    "a": 2,
+    "e": "An AAAA record maps a hostname to an IPv6 address. An A record maps to an IPv4 address, a PTR record performs reverse lookup (IP to hostname), and a CNAME record is an alias pointing to another hostname — IPv6 hostname mapping is the AAAA record."
+  },
+  {
+    "d": 2,
+    "q": "Which protocol is used to distribute routing information between different autonomous systems on the internet?",
+    "o": [
+      "OSPF",
+      "RIP",
+      "BGP",
+      "EIGRP"
+    ],
+    "a": 2,
+    "e": "BGP (Border Gateway Protocol) is the inter-domain routing protocol that exchanges routing information between autonomous systems, forming the backbone of internet routing. OSPF, RIP, and EIGRP are interior gateway protocols used within a single autonomous system — inter-autonomous system routing is BGP's role."
+  },
+  {
+    "d": 3,
+    "q": "A developer discovers that the production web application uses the same database credentials for both read-only reporting queries and write-privileged administrative functions. Which security concern does this MOST directly violate?",
+    "o": [
+      "Data minimization",
+      "Defense in depth",
+      "Least privilege",
+      "Separation of duties"
+    ],
+    "a": 2,
+    "e": "Least privilege requires that each function or user only has the permissions strictly necessary for that specific task. Granting write-level privileges to a read-only reporting function violates this principle. Data minimization concerns limiting data collection, defense in depth concerns layering controls, and separation of duties concerns splitting tasks among people — over-privileged service credentials violate least privilege."
+  },
+  {
+    "d": 2,
+    "q": "A hardware security module (HSM) is used to store and manage cryptographic keys. What is the PRIMARY advantage of an HSM over software-based key storage?",
+    "o": [
+      "Faster network throughput",
+      "Lower cost",
+      "Keys are never exposed in plaintext outside the tamper-resistant boundary",
+      "Simpler key rotation"
+    ],
+    "a": 2,
+    "e": "An HSM keeps cryptographic keys inside a tamper-resistant hardware boundary, ensuring private keys never leave in plaintext even for cryptographic operations. Software-based storage exposes keys in memory and on disk. HSMs are typically more expensive, may not directly affect network throughput, and don't inherently simplify key rotation — tamper-resistant containment of keys is the primary security advantage."
+  },
+  {
+    "d": 2,
+    "q": "Which encryption mode of operation produces identical ciphertext blocks for identical plaintext blocks, making it vulnerable to pattern analysis?",
+    "o": [
+      "CBC (Cipher Block Chaining)",
+      "CTR (Counter)",
+      "GCM (Galois/Counter Mode)",
+      "ECB (Electronic Code Book)"
+    ],
+    "a": 3,
+    "e": "ECB encrypts each block independently with the same key, so identical plaintext blocks always produce identical ciphertext blocks, leaking patterns (famously visible in the 'ECB penguin' example). CBC chains each block to the previous ciphertext, CTR uses a counter to make each block unique, and GCM adds authentication on top of counter mode — ECB's deterministic block-by-block encryption is the vulnerability."
+  },
+  {
+    "d": 2,
+    "q": "A company implements a Faraday cage around its server room. What threat does this PRIMARILY mitigate?",
+    "o": [
+      "Physical theft",
+      "Tailgating",
+      "Electromagnetic eavesdropping (TEMPEST attacks)",
+      "Power surges"
+    ],
+    "a": 2,
+    "e": "A Faraday cage blocks electromagnetic signals from entering or exiting the enclosed space, specifically mitigating electromagnetic eavesdropping (TEMPEST-style attacks) where RF emissions from equipment could be intercepted to reconstruct data. It does not prevent physical theft, tailgating through doors, or power surges — electromagnetic signal containment is its primary purpose."
+  },
+  {
+    "d": 2,
+    "q": "An organization deploys geofencing on its mobile device management platform. What does geofencing specifically accomplish?",
+    "o": [
+      "Encrypts all data on the device",
+      "Restricts access based on the device's physical location",
+      "Prevents users from installing unauthorized apps",
+      "Enforces password complexity"
+    ],
+    "a": 1,
+    "e": "Geofencing uses GPS or network-based location data to trigger policies based on where a device is physically located, such as restricting access or wiping the device if it leaves a defined geographic boundary. It does not inherently encrypt data, block unauthorized apps, or enforce passwords — location-based policy enforcement is geofencing's specific function."
+  },
+  {
+    "d": 2,
+    "q": "Which cloud service model gives the customer the most control over the operating system, middleware, and runtime environment?",
+    "o": [
+      "SaaS",
+      "PaaS",
+      "IaaS",
+      "FaaS"
+    ],
+    "a": 2,
+    "e": "In IaaS, the customer controls the OS, middleware, runtime, and applications; the provider only manages the physical infrastructure and hypervisor. PaaS abstracts away the OS and runtime, SaaS delivers a complete application managed by the provider, and FaaS abstracts away everything except the code — IaaS gives the customer the most control."
+  },
+  {
+    "d": 3,
+    "q": "A security engineer discovers that an internal application stores API keys in plaintext in environment variables on the server. Which solution BEST addresses this risk?",
+    "o": [
+      "Encrypting the environment variables with AES",
+      "Storing API keys in a secrets management vault",
+      "Hashing the API keys with SHA-256",
+      "Using HTTPS for all API calls"
+    ],
+    "a": 1,
+    "e": "A secrets management vault (such as HashiCorp Vault or cloud provider secret managers) stores sensitive credentials securely, controls access with fine-grained policies, provides auditing, and can rotate secrets automatically. Encrypting environment variables still leaves them on the server, hashing is irreversible and would break API authentication, and HTTPS only protects data in transit — a dedicated secrets vault is the best solution."
+  },
+  {
+    "d": 2,
+    "q": "Which protocol operates at the application layer and allows administrators to securely configure, monitor, and manage network devices?",
+    "o": [
+      "SNMP v2c",
+      "Telnet",
+      "SNMPv3",
+      "ICMP"
+    ],
+    "a": 2,
+    "e": "SNMPv3 provides encrypted, authenticated management of network devices at the application layer. SNMPv2c lacks authentication and encryption (uses cleartext community strings), Telnet is an insecure remote access protocol (not specifically for SNMP device management), and ICMP is a control/diagnostic protocol rather than a management configuration protocol — SNMPv3 specifically provides secure authenticated management."
+  },
+  {
+    "d": 2,
+    "q": "An administrator configures switch ports to only allow a maximum of two MAC addresses at a time, shutting down a port automatically if more are detected. Which attack does this PRIMARILY prevent?",
+    "o": [
+      "VLAN hopping",
+      "ARP poisoning",
+      "MAC flooding",
+      "DNS spoofing"
+    ],
+    "a": 2,
+    "e": "MAC flooding overwhelms a switch's CAM table with fake MAC addresses, potentially causing the switch to flood traffic to all ports. Port security limits the number of MAC addresses per port and shuts down the port on violation, directly countering this. VLAN hopping uses trunk negotiation, ARP poisoning sends false ARP replies, and DNS spoofing corrupts name resolution — MAC address limits per port specifically prevent MAC flooding."
+  },
+  {
+    "d": 3,
+    "q": "A security analyst receives an alert that a service account is performing Kerberoasting. What is the attacker's MOST likely goal?",
+    "o": [
+      "Forge Kerberos TGTs for any user",
+      "Extract and offline-crack service account password hashes",
+      "Reset the domain administrator password",
+      "Disable Kerberos pre-authentication"
+    ],
+    "a": 1,
+    "e": "Kerberoasting requests Kerberos service tickets for accounts with SPNs (service principal names) and cracks the ticket hashes offline to recover plaintext passwords of those service accounts. Forging TGTs for any user is a Golden Ticket attack, resetting passwords requires higher privileges, and disabling pre-authentication (AS-REP roasting) is a different attack — offline cracking of service account ticket hashes is the goal of Kerberoasting."
+  },
+  {
+    "d": 3,
+    "q": "Which attack technique involves an attacker creating a forged Kerberos Ticket Granting Ticket (TGT) using a stolen krbtgt account hash, granting persistent access to any resource in the domain?",
+    "o": [
+      "Pass-the-hash",
+      "Silver ticket attack",
+      "Kerberoasting",
+      "Golden ticket attack"
+    ],
+    "a": 3,
+    "e": "A Golden Ticket attack uses a compromised krbtgt hash to forge TGTs, granting the attacker persistent, often unlimited access to any resource in the domain. Pass-the-hash reuses captured NTLM hashes, a Silver Ticket forges service tickets rather than TGTs, and Kerberoasting cracks service account ticket hashes offline — forging TGTs with the krbtgt hash is specifically the Golden Ticket attack."
+  },
+  {
+    "d": 2,
+    "q": "Which type of vulnerability assessment uses simulated real-world attack scenarios to test how existing security controls respond?",
+    "o": [
+      "Credentialed vulnerability scan",
+      "External vulnerability scan",
+      "Compliance scan",
+      "Red team assessment"
+    ],
+    "a": 3,
+    "e": "A red team assessment simulates real adversarial tactics and techniques against an organization's actual defenses, testing how well people, processes, and technology respond. A credentialed scan checks for vulnerabilities using valid credentials, an external scan checks internet-facing systems from outside, and a compliance scan checks for policy adherence — simulated real-world attack testing with focus on detection/response is a red team assessment."
+  },
+  {
+    "d": 2,
+    "q": "A security team is analyzing a PCAP file and observes repeated TCP SYN packets being sent to sequential destination ports on a single host without completing the handshake. This activity is MOST consistent with:",
+    "o": [
+      "A DDoS attack",
+      "Legitimate web browsing",
+      "A port scan",
+      "A DNS amplification attack"
+    ],
+    "a": 2,
+    "e": "Sequential SYN packets to different ports that don't complete the handshake are the hallmark of a SYN (half-open) port scan, used to discover which ports are listening. A DDoS floods a service from many sources, legitimate browsing would show complete HTTP exchanges, and DNS amplification uses UDP requests to a DNS resolver — sequential incomplete SYN connections to different ports is a port scan."
+  },
+  {
+    "d": 3,
+    "q": "An organization implements a UEBA (User and Entity Behavior Analytics) system. Which scenario would BEST illustrate its core value?",
+    "o": [
+      "Blocking known malware using signature detection",
+      "Detecting an employee gradually downloading unusual volumes of data over three months",
+      "Preventing SQL injection in web applications",
+      "Generating compliance reports"
+    ],
+    "a": 1,
+    "e": "UEBA establishes behavioral baselines for users and entities, then detects deviations that may indicate compromise or insider threat — such as gradually increasing data access that wouldn't trigger threshold-based alerts. Signature-based malware detection is AV/EDR, SQL injection prevention is a WAF/coding concern, and compliance reports are a GRC function — behavioral baselining to detect slow anomalies is UEBA's core value."
+  },
+  {
+    "d": 2,
+    "q": "An organization's incident response plan requires that an attorney be notified before any external communications about a security incident. What is the PRIMARY legal purpose of this requirement?",
+    "o": [
+      "To accelerate the response",
+      "To establish attorney-client privilege over incident communications",
+      "To comply with GDPR",
+      "To enable evidence collection"
+    ],
+    "a": 1,
+    "e": "Notifying legal counsel early can bring incident-related communications under attorney-client privilege, protecting sensitive details from being disclosed in litigation. This isn't primarily about speed, may overlap with but isn't specifically driven by GDPR, and doesn't directly affect evidence collection — protecting communications through attorney-client privilege is the primary legal purpose."
+  },
+  {
+    "d": 2,
+    "q": "Which hashing algorithm is considered CRYPTOGRAPHICALLY BROKEN and should NOT be used for new security applications?",
+    "o": [
+      "SHA-3",
+      "SHA-256",
+      "MD5",
+      "BLAKE2"
+    ],
+    "a": 2,
+    "e": "MD5 has known collision vulnerabilities and can be broken in seconds with modern hardware, making it unsuitable for any security-sensitive purpose. SHA-3 and SHA-256 are current NIST-recommended algorithms, and BLAKE2 is a modern, fast secure hash function — MD5 is specifically the broken algorithm that should be avoided."
+  },
+  {
+    "d": 2,
+    "q": "Which feature of TLS 1.3 directly improves performance by reducing the number of round-trips required to establish a session compared to TLS 1.2?",
+    "o": [
+      "Larger cipher suites",
+      "1-RTT handshake (and 0-RTT resumption)",
+      "Removal of elliptic curve support",
+      "Mandatory certificate pinning"
+    ],
+    "a": 1,
+    "e": "TLS 1.3 reduced the handshake to 1 round-trip time (1-RTT) versus TLS 1.2's 2-RTT handshake, and introduced 0-RTT resumption for returning clients, improving performance significantly. TLS 1.3 actually reduced (not increased) cipher suite options, it retained and expanded ECC support, and it doesn't mandate certificate pinning — the 1-RTT handshake is the key performance improvement."
+  },
+  {
+    "d": 2,
+    "q": "Which cloud security concept describes the division of security responsibilities between a cloud provider and a cloud customer?",
+    "o": [
+      "Cloud governance framework",
+      "Zero trust architecture",
+      "Shared responsibility model",
+      "Defense in depth"
+    ],
+    "a": 2,
+    "e": "The shared responsibility model defines which security tasks are handled by the cloud provider (e.g., physical security, hypervisor patching in IaaS) and which remain the customer's responsibility (e.g., OS patching, application security, data protection). A governance framework, zero trust architecture, and defense in depth are broader concepts — the provider/customer division of responsibility is specifically the shared responsibility model."
+  },
+  {
+    "d": 3,
+    "q": "A developer stores sensitive configuration values directly in source code committed to a public Git repository. An attacker uses automated scanning tools to discover these. Which tool category is the attacker MOST likely using?",
+    "o": [
+      "Network vulnerability scanner",
+      "Web application fuzzer",
+      "Secret scanning tool",
+      "Packet analyzer"
+    ],
+    "a": 2,
+    "e": "Secret scanning tools (such as truffleHog, GitLeaks, or GitHub's built-in scanning) search public and private repositories for hardcoded credentials, API keys, and other secrets. A network vulnerability scanner probes live hosts, a web application fuzzer sends malformed inputs to running apps, and a packet analyzer captures network traffic — automated scanning of code repositories for secrets is secret scanning."
+  },
+  {
+    "d": 2,
+    "q": "Which concept ensures that cryptographic keys are recoverable by a trusted third party or authority, allowing access to encrypted data when the original key holder is unavailable?",
+    "o": [
+      "Key rotation",
+      "Forward secrecy",
+      "Key escrow",
+      "Key derivation"
+    ],
+    "a": 2,
+    "e": "Key escrow involves storing a copy of cryptographic keys with a trusted third party or authority so that encrypted data can be recovered if the original key is lost or the holder is unavailable. Key rotation replaces keys periodically, forward secrecy ensures past sessions can't be decrypted if long-term keys are compromised, and key derivation creates keys from a master secret — recovery by a trusted party is key escrow."
+  },
+  {
+    "d": 2,
+    "q": "A mobile device is set to automatically lock and require PIN re-entry if it has not been used for 30 seconds. This is an example of which control?",
+    "o": [
+      "Remote wipe",
+      "Geofencing",
+      "Screen timeout with lock",
+      "Containerization"
+    ],
+    "a": 2,
+    "e": "A screen timeout with automatic lock reduces the window of physical access by an unauthorized person if a device is left unattended. Remote wipe erases data remotely, geofencing restricts access by location, and containerization separates personal and corporate data — automatic locking after inactivity is a screen timeout lock."
+  },
+  {
+    "d": 2,
+    "q": "Which certificate field specifies additional hostnames, IP addresses, or email addresses that a TLS certificate is valid for, beyond the primary Common Name?",
+    "o": [
+      "Extended Key Usage",
+      "Subject Key Identifier",
+      "Subject Alternative Name",
+      "Certificate Policies"
+    ],
+    "a": 2,
+    "e": "The Subject Alternative Name (SAN) extension lists additional identities (DNS names, IPs, emails) for which the certificate is valid, allowing one certificate to cover multiple hostnames. Extended Key Usage specifies allowed certificate uses (e.g., server authentication), Subject Key Identifier is used for key management, and Certificate Policies define usage constraints — additional valid identities are stored in the SAN field."
+  },
+  {
+    "d": 2,
+    "q": "A threat intelligence report describes an advanced persistent threat (APT) group's use of specific tools, techniques, and procedures observed across multiple victims. This information falls under which type of threat intelligence?",
+    "o": [
+      "Strategic threat intelligence",
+      "Operational threat intelligence",
+      "Tactical threat intelligence",
+      "Technical threat intelligence"
+    ],
+    "a": 2,
+    "e": "Tactical threat intelligence describes specific adversary TTPs (tools, techniques, and procedures), enabling defenders to understand and detect how a threat actor operates. Strategic intelligence informs executive-level decision-making about broad trends, operational intelligence supports current campaign-level awareness, and technical intelligence covers specific indicators like IP addresses and hashes — TTPs of a specific group are tactical intelligence."
+  },
+  {
+    "d": 2,
+    "q": "A security engineer configures the organization's DNS server to refuse to resolve domain names that appear on a list of known malicious command-and-control domains. This is known as a:",
+    "o": [
+      "DNS DNSSEC implementation",
+      "DNS sinkholing",
+      "DNS enumeration block",
+      "Reverse DNS lookup"
+    ],
+    "a": 1,
+    "e": "DNS sinkholing redirects (or blocks) DNS queries for known malicious domains, either returning a non-routable IP or pointing to a logging server rather than the attacker's C2 server. DNSSEC provides cryptographic integrity for DNS responses, DNS enumeration blocking prevents zone transfers, and reverse DNS lookup maps IPs to names — redirecting known malicious domains to a controlled destination is DNS sinkholing."
+  },
+  {
+    "d": 2,
+    "q": "During a security review, a team notes that application error messages display detailed stack traces and internal file paths to end users. Which risk does this PRIMARILY create?",
+    "o": [
+      "Denial of service",
+      "Cross-site scripting",
+      "Information disclosure",
+      "Privilege escalation"
+    ],
+    "a": 2,
+    "e": "Verbose error messages containing stack traces and internal paths expose information about the application's internal structure, technologies, and potential vulnerabilities, aiding reconnaissance. This doesn't directly cause DoS, XSS, or privilege escalation — leaking implementation details to users is specifically an information disclosure risk."
+  },
+  {
+    "d": 3,
+    "q": "A forensic investigator needs to determine the exact time zone setting of a compromised Linux server to accurately reconstruct the attack timeline from log entries. Which file should they examine?",
+    "o": [
+      "/etc/passwd",
+      "/etc/hosts",
+      "/etc/timezone",
+      "/var/log/auth.log"
+    ],
+    "a": 2,
+    "e": "The /etc/timezone file (or /etc/localtime symlink) stores the system's configured time zone, which is essential for correctly interpreting local-time log entries. /etc/passwd contains user account information, /etc/hosts maps hostnames to IPs, and /var/log/auth.log contains authentication events — the time zone configuration lives in /etc/timezone."
+  },
+  {
+    "d": 2,
+    "q": "An attacker uses a technique to make their malicious traffic appear to originate from a trusted IP address by modifying packet headers. This is known as:",
+    "o": [
+      "Session hijacking",
+      "IP spoofing",
+      "ARP poisoning",
+      "DNS hijacking"
+    ],
+    "a": 1,
+    "e": "IP spoofing involves falsifying the source IP address in packet headers to impersonate another host or bypass IP-based access controls. Session hijacking takes over an existing authenticated session, ARP poisoning associates an attacker's MAC with a legitimate IP, and DNS hijacking redirects name resolution — falsifying source IP addresses is specifically IP spoofing."
+  },
+  {
+    "d": 2,
+    "q": "Which of the following describes a risk treatment option where an organization documents a known risk and consciously decides to neither mitigate, avoid, nor transfer it?",
+    "o": [
+      "Risk avoidance",
+      "Risk mitigation",
+      "Risk acceptance",
+      "Risk transference"
+    ],
+    "a": 2,
+    "e": "Risk acceptance means knowingly tolerating a risk without additional action, typically when the cost of controls exceeds the potential loss. Risk avoidance eliminates the risk-causing activity, risk mitigation reduces the risk through controls, and risk transference shifts the financial impact to another party — accepting and documenting without taking further action is risk acceptance."
+  },
+  {
+    "d": 2,
+    "q": "A security team implements an IDS that analyzes network traffic and flags packets that match known attack signatures in its database. Which IDS detection method is being used?",
+    "o": [
+      "Anomaly-based detection",
+      "Heuristic detection",
+      "Signature-based detection",
+      "Behavioral detection"
+    ],
+    "a": 2,
+    "e": "Signature-based detection compares traffic patterns against a database of known attack signatures. Anomaly-based detection flags deviations from a learned baseline, heuristic detection uses rules of thumb about suspicious behavior, and behavioral detection broadly analyzes behavior patterns — matching against a known-attack database is signature-based detection."
+  },
+  {
+    "d": 2,
+    "q": "Which document type is typically used between two organizations to document mutual understanding of a working relationship without creating legal obligations?",
+    "o": [
+      "Master Service Agreement",
+      "Non-Disclosure Agreement",
+      "Memorandum of Understanding",
+      "Statement of Work"
+    ],
+    "a": 2,
+    "e": "A Memorandum of Understanding (MOU) expresses mutual intent and shared objectives between parties without the legal enforceability of a contract. An MSA is a binding ongoing contract, an NDA is a legally binding confidentiality agreement, and a SOW defines specific project deliverables under a contract — non-binding mutual understanding is the MOU's purpose."
+  },
+  {
+    "d": 3,
+    "q": "A developer is hardening an API endpoint. Which of the following security controls MOST directly prevents excessive automated use of the API that could degrade service or enable credential guessing?",
+    "o": [
+      "Input validation",
+      "Output encoding",
+      "Rate limiting",
+      "Certificate pinning"
+    ],
+    "a": 2,
+    "e": "Rate limiting caps the number of requests from a single source within a time window, preventing both brute-force credential guessing and excessive resource consumption that degrades service. Input validation prevents injection attacks, output encoding prevents XSS, and certificate pinning restricts which certificates a client trusts — capping request frequency is rate limiting's role."
+  },
+  {
+    "d": 2,
+    "q": "Which type of access control model allows resource owners to grant other users access at their own discretion, without central authority enforcement?",
+    "o": [
+      "Mandatory Access Control (MAC)",
+      "Role-Based Access Control (RBAC)",
+      "Discretionary Access Control (DAC)",
+      "Attribute-Based Access Control (ABAC)"
+    ],
+    "a": 2,
+    "e": "DAC allows resource owners to set access permissions at their own discretion. MAC is enforced by the system based on labels and clearances and cannot be overridden by users, RBAC grants permissions based on job roles, and ABAC evaluates multiple attributes dynamically — owner-granted discretionary permissions are the hallmark of DAC."
+  },
+  {
+    "d": 3,
+    "q": "A CISO wants to measure how long it takes on average to fix a vulnerability after it is discovered. Which metric BEST represents this?",
+    "o": [
+      "Mean Time Between Failures (MTBF)",
+      "Mean Time to Detect (MTTD)",
+      "Mean Time to Repair (MTTR)",
+      "Mean Time to Respond (MTTR)"
+    ],
+    "a": 2,
+    "e": "Mean Time to Repair (MTTR) measures the average time taken to fix or remediate an issue after it has been identified. MTBF measures reliability (average time between failures), MTTD measures how long it takes to detect an issue, and while 'Mean Time to Respond' uses the same acronym, 'repair' specifically covers the remediation timeframe — MTTR as time-to-fix is the correct metric here."
+  },
+  {
+    "d": 2,
+    "q": "A company's development team commits code directly to the main branch without any security review. A security architect recommends integrating DAST into the CI/CD pipeline. What does DAST primarily test?",
+    "o": [
+      "Source code for vulnerabilities without execution",
+      "Deployed running applications from the outside",
+      "Static configuration files",
+      "Database schema design"
+    ],
+    "a": 1,
+    "e": "Dynamic Application Security Testing (DAST) tests a running application by sending requests and analyzing responses, simulating an external attacker. SAST tests source code without executing it, and neither configuration files nor database schemas are DAST's primary target — testing a live application from the outside is DAST's approach."
+  },
+  {
+    "d": 2,
+    "q": "Which privacy law gives California residents the right to know what personal information is collected, request deletion, and opt out of the sale of their data?",
+    "o": [
+      "GDPR",
+      "HIPAA",
+      "FERPA",
+      "CCPA"
+    ],
+    "a": 3,
+    "e": "The California Consumer Privacy Act (CCPA) grants California residents specific rights over their personal data including access, deletion, and opt-out of data sale. GDPR is the EU's regulation with similar but distinct requirements, HIPAA governs U.S. health information, and FERPA protects student educational records — these specific rights for California residents are defined by CCPA."
+  },
+  {
+    "d": 2,
+    "q": "An organization must securely destroy old hard drives containing sensitive data. Which method provides the HIGHEST assurance that data cannot be recovered?",
+    "o": [
+      "Formatting the drive",
+      "Overwriting with zeros three times",
+      "Degaussing for HDDs",
+      "Physical destruction (shredding)"
+    ],
+    "a": 3,
+    "e": "Physical destruction by shredding or crushing provides the highest assurance that no data can be recovered since the storage medium itself is destroyed. Formatting leaves data recoverable, multiple overwrites may not be effective on SSDs or areas with bad sectors, and degaussing works for magnetic HDDs but not SSDs — physical destruction is the highest assurance method."
+  },
+  {
+    "d": 3,
+    "q": "A software company releases a security advisory describing a vulnerability in their product and makes a patch available. A system administrator has 30 days under policy to apply the patch. Which process governs applying the patch to production?",
+    "o": [
+      "Incident response",
+      "Business impact analysis",
+      "Vulnerability management / patch management",
+      "Change management"
+    ],
+    "a": 2,
+    "e": "Vulnerability/patch management defines the process for tracking, prioritizing, testing, and applying security patches. However, the actual deployment to production systems is also governed by change management, which ensures changes are reviewed and approved — in practice these overlap, but the process that owns tracking the vulnerability and ensuring the patch is applied is vulnerability/patch management. Change management governs the deployment side of the same process."
+  },
+  {
+    "d": 2,
+    "q": "Which security framework provides a structured taxonomy of adversary tactics, techniques, and sub-techniques observed in real-world attacks, widely used for threat modeling and red teaming?",
+    "o": [
+      "NIST SP 800-53",
+      "OWASP Top 10",
+      "MITRE ATT&CK",
+      "ISO/IEC 27002"
+    ],
+    "a": 2,
+    "e": "MITRE ATT&CK is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations, widely used for threat modeling, detection engineering, and red teaming. NIST SP 800-53 is a control catalog, OWASP Top 10 lists web application vulnerabilities, and ISO/IEC 27002 is a security best-practice standard — TTPs from real attacks are ATT&CK's focus."
+  },
+  {
+    "d": 2,
+    "q": "Which type of penetration test is conducted with the testing team having no prior knowledge of the target environment, simulating a real external attacker?",
+    "o": [
+      "White box test",
+      "Gray box test",
+      "Black box test",
+      "Crystal box test"
+    ],
+    "a": 2,
+    "e": "A black box test gives the tester no prior information about the target, simulating a real external attacker who must gather all information from scratch. A white box (crystal box) test provides full access to documentation, code, and credentials, a gray box test provides partial information — zero prior knowledge is the black box approach."
+  },
+  {
+    "d": 2,
+    "q": "A web application returns a different response time for valid versus invalid usernames during login. An attacker exploits this to enumerate valid usernames. Which vulnerability type is this?",
+    "o": [
+      "SQL injection",
+      "IDOR",
+      "Timing attack / side-channel",
+      "Session fixation"
+    ],
+    "a": 2,
+    "e": "A timing attack (a type of side-channel attack) exploits differences in processing time to infer information such as whether a username is valid. SQL injection manipulates database queries, IDOR accesses unauthorized objects directly via predictable references, and session fixation plants a known session ID — exploiting response time differences to infer validity is a timing/side-channel attack."
+  },
+  {
+    "d": 2,
+    "q": "Which protocol provides a mechanism for mutual authentication in which both the client and server verify each other's identities during a TLS handshake?",
+    "o": [
+      "One-way TLS",
+      "Certificate pinning",
+      "Mutual TLS (mTLS)",
+      "OCSP stapling"
+    ],
+    "a": 2,
+    "e": "Mutual TLS (mTLS) requires both the client and server to present and validate certificates during the TLS handshake, providing two-way authentication. One-way TLS only authenticates the server, certificate pinning restricts which certificates a client trusts, and OCSP stapling is a revocation-checking mechanism — bidirectional certificate authentication is mTLS."
+  },
+  {
+    "d": 2,
+    "q": "An organization deploys a web application firewall configured to block requests that match known attack patterns such as SQL injection signatures. This WAF is operating in which mode?",
+    "o": [
+      "Passive/monitor mode",
+      "Learning/training mode",
+      "Transparent mode",
+      "Blocking/enforcement mode"
+    ],
+    "a": 3,
+    "e": "When a WAF actively blocks requests matching attack signatures rather than just logging them, it is operating in blocking/enforcement mode. Passive/monitor or learning mode logs traffic without blocking, transparent mode is a deployment configuration rather than an enforcement decision — actively dropping matching traffic is blocking/enforcement mode."
+  },
+  {
+    "d": 3,
+    "q": "An organization is adopting a DevSecOps model. Which practice MOST directly shifts security responsibility earlier in the software development lifecycle?",
+    "o": [
+      "Conducting penetration tests before release",
+      "Requiring code review by a security team after development is complete",
+      "Integrating automated security testing into every code commit in the CI/CD pipeline",
+      "Deploying WAFs in production"
+    ],
+    "a": 2,
+    "e": "Integrating automated security tests (SAST, SCA, secret scanning) into CI/CD pipelines means vulnerabilities are caught and fixed during development — shift-left security. Pre-release penetration tests, post-development security reviews, and production WAFs all intervene after code is written, not during it — automated testing at every commit most directly shifts security left."
+  },
+  {
+    "d": 2,
+    "q": "Which control would MOST directly prevent an attacker from using stolen plaintext passwords discovered in a data breach at one website to access accounts on other websites?",
+    "o": [
+      "Multi-factor authentication alone",
+      "Password complexity requirements",
+      "Unique passwords per account (enforced via a password manager)",
+      "Password expiration policies"
+    ],
+    "a": 2,
+    "e": "Credential stuffing succeeds because users reuse the same passwords across sites. Unique passwords per account directly prevent this since a stolen password from one site is useless on others. MFA adds a second factor but doesn't make stolen passwords useless if MFA is not mandatory, complexity requirements don't prevent reuse, and expiration only periodically forces changes — unique per-site passwords directly defeat credential stuffing."
+  },
+  {
+    "d": 3,
+    "q": "During a threat model review using STRIDE, a team identifies that an attacker can replay a captured authentication token to impersonate a user. Which STRIDE category does this fall under?",
+    "o": [
+      "Spoofing",
+      "Tampering",
+      "Repudiation",
+      "Elevation of privilege"
+    ],
+    "a": 0,
+    "e": "Spoofing in STRIDE refers to illegitimately assuming another identity, which includes replaying a captured token to impersonate a legitimate user. Tampering involves altering data, Repudiation involves denying actions, and Elevation of Privilege involves gaining unauthorized higher access — identity impersonation through token replay is categorized under Spoofing."
   }
 ]
